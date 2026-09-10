@@ -30,7 +30,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 4rem;display:
 .nav-links a:hover,.nav-links a.current{color:#fff}
 .nav-cta{background:none;border:1px solid rgba(201,168,76,.45);color:var(--gold);padding:.62rem 1.35rem;font-family:'Inter',sans-serif;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:.25s}
 .nav-cta:hover{background:rgba(201,168,76,.12)}
-@media(max-width:820px){nav{padding:1.1rem 1.4rem}.nav-links{display:none}}
+@media(max-width:820px){nav{position:static;padding:1.1rem 1.4rem}.nav-links{display:none}
+  /* nav scrolls away on mobile, so the samples section no longer needs clearance for it */
+  #samples{padding-top:2.5rem!important}}
 
 .wrap{max-width:1180px;margin:0 auto;padding:0 4rem}
 @media(max-width:820px){.wrap{padding:0 1.4rem}}
@@ -141,6 +143,21 @@ footer ul a:hover{color:#fff}
 .avatar-note{color:var(--muted);font-size:.9rem;margin-top:2rem;border-left:2px solid rgba(201,168,76,.4);padding-left:1.2rem;max-width:70ch}
 @media(max-width:900px){.avatar-grid{grid-template-columns:repeat(2,1fr);gap:1.2rem}}
 @media(max-width:560px){.avatar-grid{grid-template-columns:1fr}}
+
+/* MOBILE STICKY CTA — bottom bar, phones only */
+.mobile-cta{display:none}
+@media(max-width:820px){
+  .mobile-cta{
+    display:block;position:fixed;left:0;right:0;bottom:0;z-index:120;
+    background:var(--gold);color:#0a0900;text-decoration:none;font-weight:500;
+    font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;
+    padding:1rem 1.2rem;padding-bottom:calc(1rem + env(safe-area-inset-bottom,0px));
+    box-shadow:0 -10px 30px rgba(0,0,0,.55);
+    transition:transform .28s ease;will-change:transform;
+  }
+  .mobile-cta.is-hidden{transform:translateY(130%)}
+  body{padding-bottom:4.5rem}
+}
 </style>
 </head>
 <body>
@@ -443,5 +460,18 @@ async function submitTrainerForm(e){
   }finally{ if(btn) btn.disabled=false; }
 }
 </script>
+<a href="#enquire" class="mobile-cta">Book a demonstration</a>
+
+<script>
+(function(){
+  var bar=document.querySelector('.mobile-cta');
+  var target=document.getElementById('enquire');
+  if(!bar||!target||!('IntersectionObserver' in window))return;
+  new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ bar.classList.toggle('is-hidden', e.isIntersecting); });
+  },{threshold:0.12}).observe(target);
+})();
+</script>
+
 </body>
 </html>
