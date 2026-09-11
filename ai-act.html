@@ -28,61 +28,77 @@
   }
   .wrap{max-width:980px;margin:0 auto;padding:0 20px}
 
-  header{padding-block:28px;border-bottom:1px solid var(--line)}
+  header{padding-block:20px;border-bottom:1px solid var(--line)}
   .brand{
-    font-family:'Syne',sans-serif;font-weight:800;font-size:20px;
+    font-family:'Syne',sans-serif;font-weight:800;font-size:19px;
     letter-spacing:-.02em;color:var(--fg);text-decoration:none;
   }
   .brand span{color:var(--gold)}
-  .back{float:right;font-size:13px;color:var(--muted);text-decoration:none;padding-top:5px}
+  .back{float:right;font-size:13px;color:var(--muted);text-decoration:none;padding-top:4px}
   .back:hover{color:var(--fg)}
 
-  main{padding-block:56px 72px}
+  main{padding-block:34px 72px}
 
   .eyebrow{
-    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--gold);margin:0 0 18px;font-weight:500;
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold);margin:0 0 12px;font-weight:500;
   }
   h1{
     font-family:'Syne',sans-serif;font-weight:800;
-    font-size:clamp(34px,6vw,60px);line-height:1.02;
-    letter-spacing:-.03em;margin:0 0 20px;
+    font-size:clamp(28px,6vw,60px);line-height:1.02;
+    letter-spacing:-.03em;margin:0 0 14px;
   }
   .lede{
-    font-size:clamp(16px,2.2vw,20px);line-height:1.6;
-    color:#c9c9cf;max-width:60ch;margin:0 0 40px;
+    font-size:clamp(15px,2.2vw,20px);line-height:1.55;
+    color:#c9c9cf;max-width:60ch;margin:0 0 24px;
   }
   .lede strong{color:var(--fg);font-weight:500}
+  .lede .desk{display:inline}
 
+  /* --- the avatar --- */
   .stage{
     border:1px solid var(--line);border-radius:14px;
     overflow:hidden;background:#0a0a0c;
+    aspect-ratio:16/9;
   }
-  .stage iframe{
-    display:block;width:100%;aspect-ratio:16/9;max-width:100%;border:0;
-  }
-  .mic{
-    font-size:13px;color:var(--muted);margin:14px 0 0;
-  }
-  .mic em{color:var(--cyan);font-style:normal}
+  .stage iframe{display:block;width:100%;height:100%;border:0}
 
-  .prompts{margin-top:52px;border-top:1px solid var(--line);padding-top:36px}
+  .under{
+    display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;
+    margin-top:14px;
+  }
+  .mic{font-size:13px;color:var(--muted);margin:0}
+  .mic em{color:var(--cyan);font-style:normal}
+  .full{
+    font-size:13px;color:var(--cyan);text-decoration:none;
+    border:1px solid #143d49;border-radius:7px;padding:8px 14px;
+    white-space:nowrap;
+  }
+  .full:hover{background:#0b1d23}
+
+  @media (max-width:700px){
+    main{padding-block:22px 56px}
+    .lede{margin-bottom:18px}
+    .lede .desk{display:none}
+    .stage{aspect-ratio:9/16;max-height:74vh;margin-inline:auto;max-width:100%}
+    .under{justify-content:space-between}
+  }
+
+  .prompts{margin-top:48px;border-top:1px solid var(--line);padding-top:32px}
   .prompts h2{
     font-family:'Syne',sans-serif;font-weight:700;font-size:15px;
-    letter-spacing:.04em;margin:0 0 22px;color:var(--fg);
+    letter-spacing:.04em;margin:0 0 20px;color:var(--fg);
   }
   .prompts ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
   .prompts li{
     border:1px solid var(--line);border-radius:10px;
-    padding:16px 18px;font-size:15px;line-height:1.5;color:#d6d6db;
+    padding:15px 17px;font-size:15px;line-height:1.5;color:#d6d6db;
   }
   .prompts li::before{content:"“";color:var(--gold)}
   .prompts li::after{content:"”";color:var(--gold)}
 
-  .close{
-    margin-top:56px;border-top:1px solid var(--line);padding-top:36px;
-  }
-  .close p{font-size:16px;line-height:1.65;color:#c9c9cf;max-width:58ch;margin:0 0 24px}
+  .close{margin-top:48px;border-top:1px solid var(--line);padding-top:32px}
+  .close p{font-size:16px;line-height:1.65;color:#c9c9cf;max-width:58ch;margin:0 0 22px}
   .close strong{color:var(--fg);font-weight:500}
   .cta{
     display:inline-block;background:var(--gold);color:#000;
@@ -92,7 +108,7 @@
   .cta:hover{background:#dcbc5c}
 
   footer{
-    border-top:1px solid var(--line);padding-block:28px 44px;
+    border-top:1px solid var(--line);padding-block:26px 42px;
     font-size:13px;color:var(--muted);line-height:1.9;
   }
   footer a{color:var(--muted);text-decoration:none}
@@ -114,15 +130,26 @@
     <p class="eyebrow">Live demonstration</p>
     <h1>Ask it about the EU&nbsp;AI&nbsp;Act.</h1>
     <p class="lede">
-      This is a working AI tutor, trained on the EU AI Act and Ireland's new
-      Regulation of Artificial Intelligence Act 2026. <strong>Talk to it.</strong>
-      Ask it what your organisation can and cannot do with AI, and try to catch it out.
+      A working AI tutor, trained on the EU AI Act and Ireland's Regulation of
+      Artificial Intelligence Act 2026. <strong>Talk to it.</strong><span class="desk">
+      Ask what your organisation can and cannot do with AI, and try to catch it out.</span>
     </p>
 
     <div class="stage">
-      <iframe src="https://embed.liveavatar.com/v1/423ad6c1-ce37-40aa-8637-097255efddc9?orientation=horizontal" allow="microphone" title="LiveAvatar Embed"></iframe>
+      <iframe id="la" allow="microphone; fullscreen" title="LiveAvatar Embed" allowfullscreen></iframe>
     </div>
-    <p class="mic">Your browser will ask for <em>microphone access</em> — it needs that to hear you. Nothing is recorded.</p>
+
+    <div class="under">
+      <p class="mic">Your browser will ask for <em>microphone access</em>. Nothing is recorded.</p>
+      <a class="full" id="fullLink" href="#" target="_blank" rel="noopener">Open full screen ↗</a>
+    </div>
+
+    <noscript>
+      <p class="mic" style="margin-top:12px">
+        This demonstration needs JavaScript.
+        <a class="full" href="https://embed.liveavatar.com/v1/423ad6c1-ce37-40aa-8637-097255efddc9?orientation=horizontal" target="_blank" rel="noopener">Open it directly ↗</a>
+      </p>
+    </noscript>
 
     <section class="prompts">
       <h2>If you're not sure what to ask</h2>
@@ -156,6 +183,18 @@
     <a href="/privacy.html">Privacy</a>
   </div>
 </footer>
+
+<script>
+  // Portrait embed on phones, landscape on everything else.
+  // If the avatar looks wrong on mobile, change 'vertical' below to 'portrait'.
+  (function () {
+    var BASE = 'https://embed.liveavatar.com/v1/423ad6c1-ce37-40aa-8637-097255efddc9?orientation=';
+    var mode = window.innerWidth < 700 ? 'vertical' : 'horizontal';
+    var url = BASE + mode;
+    document.getElementById('la').src = url;
+    document.getElementById('fullLink').href = url;
+  })();
+</script>
 
 </body>
 </html>
