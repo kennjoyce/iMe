@@ -96,12 +96,10 @@
     .lede{font-size:15px;margin-bottom:12px}
     .lede .desk{display:none}
     .howto{margin-bottom:10px;font-size:14px}
-    /* Height, not aspect ratio — guarantees the Chat now button is on screen. */
-    .stage{
-      aspect-ratio:auto;
-      height:clamp(230px, calc(100svh - 285px), 520px);
-      margin-inline:auto;max-width:100%;
-    }
+    /* Landscape on phones too: LiveAvatar overlays its controls on the video,
+       so the Chat now button is always visible. Portrait stacks it underneath
+       and pushes it off the screen. */
+    .stage{margin-inline:auto;max-width:100%}
     .under{justify-content:space-between;margin-top:10px}
   }
 
@@ -157,7 +155,7 @@
       Ask what your organisation can and cannot do with AI, and try to catch it out.</span>
     </p>
 
-    <p class="howto">Tap the blue <strong>Chat now</strong> button, then just talk to him out loud.</p>
+    <p class="howto">Tap the blue <strong>Chat now</strong> button on the video, then just talk to him out loud.</p>
 
     <div class="stage">
       <iframe id="la" allow="microphone; fullscreen" title="LiveAvatar Embed" allowfullscreen></iframe>
@@ -213,8 +211,9 @@
   // If the avatar looks wrong on mobile, change 'vertical' below to 'portrait'.
   (function () {
     var BASE = 'https://embed.liveavatar.com/v1/423ad6c1-ce37-40aa-8637-097255efddc9?orientation=';
-    var mode = window.innerWidth < 700 ? 'vertical' : 'horizontal';
-    var url = BASE + mode;
+    // Always landscape. The portrait layout puts Chat now below the video,
+    // which falls off the bottom of a phone screen.
+    var url = BASE + 'horizontal';
     document.getElementById('la').src = url;
     document.getElementById('fullLink').href = url;
     document.getElementById('talkLink').href = url;
