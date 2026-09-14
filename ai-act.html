@@ -89,11 +89,20 @@
   .full:hover{background:#0b1d23}
 
   @media (max-width:700px){
-    main{padding-block:22px 56px}
-    .lede{margin-bottom:18px}
+    main{padding-block:16px 56px}
+    header{padding-block:14px}
+    .eyebrow{display:none}
+    h1{font-size:26px;margin-bottom:10px}
+    .lede{font-size:15px;margin-bottom:12px}
     .lede .desk{display:none}
-    .stage{aspect-ratio:9/16;max-height:74vh;margin-inline:auto;max-width:100%}
-    .under{justify-content:space-between}
+    .howto{margin-bottom:10px;font-size:14px}
+    /* Height, not aspect ratio — guarantees the Chat now button is on screen. */
+    .stage{
+      aspect-ratio:auto;
+      height:clamp(230px, calc(100svh - 285px), 520px);
+      margin-inline:auto;max-width:100%;
+    }
+    .under{justify-content:space-between;margin-top:10px}
   }
 
   .prompts{margin-top:48px;border-top:1px solid var(--line);padding-top:32px}
@@ -148,7 +157,7 @@
       Ask what your organisation can and cannot do with AI, and try to catch it out.</span>
     </p>
 
-    <p class="howto"><strong>Click the microphone icon</strong>, then just talk to him. He answers out loud.</p>
+    <p class="howto">Tap the blue <strong>Chat now</strong> button, then just talk to him out loud.</p>
 
     <div class="stage">
       <iframe id="la" allow="microphone; fullscreen" title="LiveAvatar Embed" allowfullscreen></iframe>
