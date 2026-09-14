@@ -53,7 +53,19 @@
     color:#c9c9cf;max-width:60ch;margin:0 0 24px;
   }
   .lede strong{color:var(--fg);font-weight:500}
+  .talklink{
+    color:var(--cyan);font-weight:500;text-decoration:none;
+    border-bottom:1px solid rgba(0,200,240,.45);
+    white-space:nowrap;
+  }
+  .talklink:hover{border-bottom-color:var(--cyan)}
   .lede .desk{display:inline}
+
+  .howto{
+    margin:0 0 14px;font-size:15px;line-height:1.5;color:#d6d6db;
+    border-left:2px solid var(--gold);padding-left:14px;
+  }
+  .howto strong{color:var(--fg);font-weight:500}
 
   /* --- the avatar --- */
   .stage{
@@ -131,9 +143,12 @@
     <h1>Ask it about the EU&nbsp;AI&nbsp;Act.</h1>
     <p class="lede">
       A working AI tutor, trained on the EU AI Act and Ireland's Regulation of
-      Artificial Intelligence Act 2026. <strong>Talk to it.</strong><span class="desk">
+      Artificial Intelligence Act 2026.
+      <a class="talklink" id="talkLink" href="https://embed.liveavatar.com/v1/423ad6c1-ce37-40aa-8637-097255efddc9?orientation=horizontal" target="_blank" rel="noopener">Talk to it.</a><span class="desk">
       Ask what your organisation can and cannot do with AI, and try to catch it out.</span>
     </p>
+
+    <p class="howto"><strong>Click the microphone icon</strong>, then just talk to him. He answers out loud.</p>
 
     <div class="stage">
       <iframe id="la" allow="microphone; fullscreen" title="LiveAvatar Embed" allowfullscreen></iframe>
@@ -193,6 +208,7 @@
     var url = BASE + mode;
     document.getElementById('la').src = url;
     document.getElementById('fullLink').href = url;
+    document.getElementById('talkLink').href = url;
   })();
 </script>
 
