@@ -3,7 +3,7 @@
 // never in the web page.
 
 const PERSONA_ID = "a6ce6004-34b6-49be-8627-55362516aa0a"; // Michael Collins
-const MAX_SECONDS = 60;
+const MAX_SECONDS = 90;
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -32,7 +32,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({ personaConfig }),
     });
 
-  // Try with Anam's own 60-second cap first; fall back to the page timer alone.
+  // Try with Anam's own 90-second cap first; fall back to the page timer alone.
   let res = await ask({ personaId: PERSONA_ID, maxSessionLengthSeconds: MAX_SECONDS });
   if (!res.ok) res = await ask({ personaId: PERSONA_ID });
 
