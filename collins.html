@@ -44,6 +44,12 @@
   .prompt { font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.2rem; line-height: 1.4; margin: 0 0 10px; padding: 12px 16px; border-left: 3px solid var(--accent-2); background: var(--panel); border-radius: 0 8px 8px 0; }
   .done h2 { font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.8rem; margin: 0 0 8px; }
   .done a { color: var(--accent-2); }
+  .contact-opt { display: flex; gap: 14px; align-items: flex-start; padding: 18px 0; border-top: 1px solid var(--line); }
+  .opt-num { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: .9rem; }
+  .link-btn { display: inline-block; margin-top: 8px; padding: 10px 16px; border: 1px solid var(--accent-2); border-radius: 8px; text-decoration: none; }
+  .email-addr { display: inline-block; margin-top: 8px; font-size: 1.1rem; color: var(--accent-2); user-select: all; word-break: break-all; }
+  .copy-btn { width: auto; margin: 8px 0 0 10px; padding: 8px 14px; background: transparent; border: 1px solid var(--line); color: var(--text); font-size: .9rem; }
+  textarea { width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line); background: #0c0f0e; color: var(--text); font: inherit; resize: vertical; }
 </style>
 </head>
 <body>
@@ -86,8 +92,38 @@
   <!-- Step 3: thank you -->
   <section id="step-done" class="card done hidden">
     <h2>Thank you for talking with Michael.</h2>
-    <p class="sub" style="margin-bottom:0">Want a full-length demo, or an avatar like this for your own organisation?
-      <a href="mailto:kenn.joyce@aiadvisers.io?subject=Michael%20Collins%20demo">Get in touch</a>.</p>
+    <p class="sub">Want a full-length demo, or an avatar like this for your own organisation? Choose whichever suits you:</p>
+
+    <div class="contact-opt">
+      <span class="opt-num">1</span>
+      <div><strong>Open your email app</strong><br>
+        <a class="link-btn" href="mailto:kenn.joyce@aiadvisers.io?subject=Michael%20Collins%20demo">Get in touch</a></div>
+    </div>
+
+    <div class="contact-opt">
+      <span class="opt-num">2</span>
+      <div style="flex:1"><strong>Send a message from here</strong>
+        <form id="contact-form" name="collins-contact" method="POST" data-netlify="true" netlify-honeypot="website">
+          <input type="hidden" name="form-name" value="collins-contact">
+          <p class="hidden"><label>Leave this empty <input name="website"></label></p>
+          <label for="c-name">Your name</label>
+          <input id="c-name" name="name" required>
+          <label for="c-email">Email</label>
+          <input id="c-email" name="email" type="email" required>
+          <label for="c-message">Message</label>
+          <textarea id="c-message" name="message" rows="4" required></textarea>
+          <button type="submit" id="c-send">Send message</button>
+          <div id="c-result" class="note"></div>
+        </form>
+      </div>
+    </div>
+
+    <div class="contact-opt">
+      <span class="opt-num">3</span>
+      <div><strong>Email us directly</strong><br>
+        <span class="email-addr">kenn.joyce@aiadvisers.io</span>
+        <button type="button" class="copy-btn" id="copy-btn">Copy address</button></div>
+    </div>
   </section>
 </main>
 
@@ -159,6 +195,40 @@
   });
 
   $("end-btn").addEventListener("click", finish);
+
+  // Pre-fill the message form with what they entered at the start
+  form.addEventListener("submit", () => {
+    $("c-name").value = $("name").value;
+    $("c-email").value = $("email").value;
+  });
+
+  $("contact-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = e.target, btn = $("c-send"), out = $("c-result");
+    const data = new FormData(f);
+    if (data.get("website")) return;
+    btn.disabled = true; btn.textContent = "Sending…";
+    try {
+      const r = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(data).toString(),
+      });
+      if (!r.ok) throw new Error(r.status);
+      f.querySelectorAll("input, textarea, button").forEach((el) => (el.disabled = true));
+      btn.textContent = "Sent";
+      out.textContent = "Thank you — your message is on its way. We'll be in touch shortly.";
+    } catch (err) {
+      btn.disabled = false; btn.textContent = "Send message";
+      out.textContent = "Sorry, that didn't send. Please use option 3 below instead.";
+    }
+  });
+
+  $("copy-btn").addEventListener("click", async () => {
+    const b = $("copy-btn");
+    try { await navigator.clipboard.writeText("kenn.joyce@aiadvisers.io"); b.textContent = "Copied"; }
+    catch (e) { b.textContent = "Select the address above to copy"; }
+  });
   window.addEventListener("pagehide", () => { try { client && client.stopStreaming(); } catch (e) {} });
 </script>
 </body>
