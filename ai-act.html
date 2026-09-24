@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ask it about the EU AI Act — iMe Live Trainer</title>
-<meta name="description" content="A live AI tutor, trained on the EU AI Act. Ask it anything about what your organisation can and cannot do with AI. No form, no sign-up.">
+<meta name="description" content="A live AI tutor, trained on the EU AI Act. Ask it what your organisation can and cannot do with AI.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -16,6 +16,7 @@
     --line:#1e1e22;
     --gold:#c9a84c;
     --cyan:#00c8f0;
+    --panel:#0a0a0c;
   }
   *{box-sizing:border-box}
   body{
@@ -27,6 +28,7 @@
     -webkit-font-smoothing:antialiased;
   }
   .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+  .hidden{display:none !important}
 
   header{padding-block:20px;border-bottom:1px solid var(--line)}
   .brand{
@@ -53,54 +55,89 @@
     color:#c9c9cf;max-width:60ch;margin:0 0 24px;
   }
   .lede strong{color:var(--fg);font-weight:500}
-  .talklink{
-    color:var(--cyan);font-weight:500;text-decoration:none;
-    border-bottom:1px solid rgba(0,200,240,.45);
-    white-space:nowrap;
-  }
-  .talklink:hover{border-bottom-color:var(--cyan)}
-  .lede .desk{display:inline}
 
+  /* --- sign-up card --- */
+  .card{
+    background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;padding:24px;max-width:560px;
+  }
+  label{display:block;font-size:13px;color:var(--muted);margin:14px 0 6px}
+  input,textarea{
+    width:100%;padding:12px 14px;border-radius:8px;
+    border:1px solid var(--line);background:#050506;color:var(--fg);
+    font:inherit;font-size:16px;
+  }
+  textarea{resize:vertical}
+  input:focus,textarea:focus{outline:2px solid var(--cyan);border-color:transparent}
+  .btn{
+    display:block;width:100%;margin-top:20px;padding:14px;border:0;border-radius:8px;
+    background:var(--gold);color:#000;font-family:'Syne',sans-serif;font-weight:700;
+    font-size:15px;cursor:pointer;
+  }
+  .btn:hover{background:#dcbc5c}
+  .btn:disabled{opacity:.6;cursor:wait}
+  .note{font-size:13px;color:var(--muted);margin:12px 0 0;line-height:1.5}
+  .note a{color:var(--muted)}
+  .error{color:#e07a6a;font-size:14px;margin-top:12px;min-height:1em}
+
+  /* --- the avatar --- */
   .howto{
     margin:0 0 14px;font-size:15px;line-height:1.5;color:#d6d6db;
     border-left:2px solid var(--gold);padding-left:14px;
   }
   .howto strong{color:var(--fg);font-weight:500}
-
-  /* --- the avatar --- */
   .stage{
     border:1px solid var(--line);border-radius:14px;
-    overflow:hidden;background:#0a0a0c;
+    overflow:hidden;background:var(--panel);
     aspect-ratio:16/9;
   }
   .stage iframe{display:block;width:100%;height:100%;border:0}
 
-  .under{
-    display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;
-    margin-top:14px;
+  .bar{
+    display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;
+    justify-content:space-between;margin-top:14px;
   }
   .mic{font-size:13px;color:var(--muted);margin:0}
   .mic em{color:var(--cyan);font-style:normal}
-  .full{
-    font-size:13px;color:var(--cyan);text-decoration:none;
-    border:1px solid #143d49;border-radius:7px;padding:8px 14px;
+  .controls{display:flex;gap:10px;align-items:center}
+  .timer{
+    font-family:'Syne',sans-serif;font-weight:700;font-size:20px;
+    color:var(--gold);font-variant-numeric:tabular-nums;min-width:3.2em;text-align:right;
+  }
+  .ghost{
+    font:inherit;font-size:13px;color:var(--cyan);background:transparent;
+    border:1px solid #143d49;border-radius:7px;padding:8px 14px;cursor:pointer;
     white-space:nowrap;
   }
-  .full:hover{background:#0b1d23}
+  .ghost:hover{background:#0b1d23}
+
+  /* --- thank-you --- */
+  .done h2{
+    font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(24px,4vw,34px);
+    letter-spacing:-.02em;margin:0 0 10px;
+  }
+  .done > p{color:#c9c9cf;line-height:1.6;margin:0 0 8px}
+  .opt{display:flex;gap:14px;align-items:flex-start;padding:18px 0;border-top:1px solid var(--line);margin-top:14px}
+  .num{
+    flex:none;width:28px;height:28px;border-radius:50%;background:var(--gold);color:#000;
+    display:grid;place-items:center;font-size:14px;font-weight:500;
+  }
+  .opt strong{font-weight:500}
+  .linkbtn{
+    display:inline-block;margin-top:8px;padding:10px 16px;border:1px solid var(--gold);
+    border-radius:8px;color:var(--gold);text-decoration:none;font-size:14px;
+  }
+  .addr{display:inline-block;margin-top:8px;font-size:17px;color:var(--gold);user-select:all;word-break:break-all}
+  .opt .btn{width:auto;display:inline-block;padding:12px 22px}
 
   @media (max-width:700px){
     main{padding-block:16px 56px}
     header{padding-block:14px}
     .eyebrow{display:none}
     h1{font-size:26px;margin-bottom:10px}
-    .lede{font-size:15px;margin-bottom:12px}
-    .lede .desk{display:none}
+    .lede{font-size:15px;margin-bottom:14px}
     .howto{margin-bottom:10px;font-size:14px}
-    /* Landscape on phones too: LiveAvatar overlays its controls on the video,
-       so the Chat now button is always visible. Portrait stacks it underneath
-       and pushes it off the screen. */
-    .stage{margin-inline:auto;max-width:100%}
-    .under{justify-content:space-between;margin-top:10px}
+    .card{padding:18px}
   }
 
   .scope{
@@ -155,30 +192,79 @@
 
     <p class="eyebrow">Live demonstration</p>
     <h1>Ask it about the EU&nbsp;AI&nbsp;Act.</h1>
-    <p class="lede">
+    <p class="lede" id="lede">
       A working AI tutor, trained on the EU AI Act and Ireland's Regulation of
-      Artificial Intelligence Act 2026.
-      <a class="talklink" id="talkLink" href="https://embed.liveavatar.com/v1/423ad6c1-ce37-40aa-8637-097255efddc9?orientation=horizontal" target="_blank" rel="noopener">Talk to it.</a><span class="desk">
-      Ask what your organisation can and cannot do with AI, and try to catch it out.</span>
+      Artificial Intelligence Act 2026. Tell us who you are and you'll have
+      <strong id="minutesText">three minutes</strong> with it. You'll need a microphone.
     </p>
 
-    <p class="howto">Tap the blue <strong>Chat now</strong> button on the video, then just talk to him out loud.</p>
+    <!-- STEP 1: sign-up. Netlify collects these and emails them to you. -->
+    <section id="step-form" class="card">
+      <form id="lead-form" name="aiact-lead" method="POST" data-netlify="true" netlify-honeypot="website">
+        <input type="hidden" name="form-name" value="aiact-lead">
+        <p class="hidden"><label>Leave this empty <input name="website"></label></p>
+        <label for="name">Your name</label>
+        <input id="name" name="name" required autocomplete="name">
+        <label for="email">Work email</label>
+        <input id="email" name="email" type="email" required autocomplete="email">
+        <label for="company">Company</label>
+        <input id="company" name="company" autocomplete="organization">
+        <button class="btn" id="start-btn" type="submit">Start the conversation</button>
+        <div id="form-error" class="error"></div>
+        <p class="note">Your details are only used to follow up on this demo. <a href="/privacy.html">Privacy</a></p>
+      </form>
+    </section>
 
-    <div class="stage">
-      <iframe id="la" allow="microphone; fullscreen" title="LiveAvatar Embed" allowfullscreen></iframe>
-    </div>
+    <!-- STEP 2: the avatar -->
+    <section id="step-chat" class="hidden">
+      <p class="howto">Tap the blue <strong>Chat now</strong> button on the video, then just talk to it out loud.</p>
+      <div class="stage" id="stage"></div>
+      <div class="bar">
+        <p class="mic">Your browser will ask for <em>microphone access</em>. Nothing is recorded.</p>
+        <div class="controls">
+          <span class="timer" id="timer">3:00</span>
+          <button class="ghost" id="full-btn" type="button">Full screen ↗</button>
+          <button class="ghost" id="end-btn" type="button">End</button>
+        </div>
+      </div>
+    </section>
 
-    <div class="under">
-      <p class="mic">Your browser will ask for <em>microphone access</em>. Nothing is recorded.</p>
-      <a class="full" id="fullLink" href="#" target="_blank" rel="noopener">Open full screen ↗</a>
-    </div>
+    <!-- STEP 3: thank you -->
+    <section id="step-done" class="card done hidden">
+      <h2>Thanks for trying it.</h2>
+      <p>Want a longer session, or a tutor like this built from your own policies? Choose whichever suits you:</p>
 
-    <noscript>
-      <p class="mic" style="margin-top:12px">
-        This demonstration needs JavaScript.
-        <a class="full" href="https://embed.liveavatar.com/v1/423ad6c1-ce37-40aa-8637-097255efddc9?orientation=horizontal" target="_blank" rel="noopener">Open it directly ↗</a>
-      </p>
-    </noscript>
+      <div class="opt">
+        <span class="num">1</span>
+        <div><strong>Open your email app</strong><br>
+          <a class="linkbtn" href="mailto:kenn.joyce@aiadvisers.io?subject=EU%20AI%20Act%20tutor%20demo">Get in touch</a></div>
+      </div>
+
+      <div class="opt">
+        <span class="num">2</span>
+        <div style="flex:1"><strong>Send a message from here</strong>
+          <form id="contact-form" name="aiact-contact" method="POST" data-netlify="true" netlify-honeypot="website">
+            <input type="hidden" name="form-name" value="aiact-contact">
+            <p class="hidden"><label>Leave this empty <input name="website"></label></p>
+            <label for="c-name">Your name</label>
+            <input id="c-name" name="name" required>
+            <label for="c-email">Email</label>
+            <input id="c-email" name="email" type="email" required>
+            <label for="c-message">Message</label>
+            <textarea id="c-message" name="message" rows="4" required></textarea>
+            <button class="btn" type="submit" id="c-send">Send message</button>
+            <div id="c-result" class="note"></div>
+          </form>
+        </div>
+      </div>
+
+      <div class="opt">
+        <span class="num">3</span>
+        <div><strong>Email directly</strong><br>
+          <span class="addr">kenn.joyce@aiadvisers.io</span>
+          <button type="button" class="ghost" id="copy-btn" style="margin-left:10px">Copy address</button></div>
+      </div>
+    </section>
 
     <p class="scope"><strong>What this is.</strong> A four-day demo, scoped to likely staff needs. Not a legal research tool — a real tutor answers in your own policy's words, with your own chosen Avatar.</p>
 
@@ -216,17 +302,126 @@
 </footer>
 
 <script>
-  // Portrait embed on phones, landscape on everything else.
-  // If the avatar looks wrong on mobile, change 'vertical' below to 'portrait'.
-  (function () {
-    var BASE = 'https://embed.liveavatar.com/v1/423ad6c1-ce37-40aa-8637-097255efddc9?orientation=';
-    // Always landscape. The portrait layout puts Chat now below the video,
-    // which falls off the bottom of a phone screen.
-    var url = BASE + 'horizontal';
-    document.getElementById('la').src = url;
-    document.getElementById('fullLink').href = url;
-    document.getElementById('talkLink').href = url;
-  })();
+(function () {
+  // ===== SETTINGS YOU CAN CHANGE =====
+  var SECONDS = 180;   // length of each conversation (180 = three minutes)
+  var AVATAR = 'https://embed.liveavatar.com/v1/423ad6c1-ce37-40aa-8637-097255efddc9?orientation=horizontal';
+  // ===================================
+
+  var $ = function (id) { return document.getElementById(id); };
+  var ticker = null, ended = false;
+
+  // Keep the wording on the page in step with SECONDS
+  var words = { 60: 'one minute', 90: 'ninety seconds', 120: 'two minutes', 180: 'three minutes', 240: 'four minutes', 300: 'five minutes' };
+  $('minutesText').textContent = words[SECONDS] || (Math.round(SECONDS / 60) + ' minutes');
+
+  function show(step) {
+    ['step-form', 'step-chat', 'step-done'].forEach(function (s) {
+      $(s).classList.toggle('hidden', s !== step);
+    });
+  }
+
+  function draw(left) {
+    $('timer').textContent = Math.floor(left / 60) + ':' + String(left % 60).padStart(2, '0');
+  }
+
+  function removeAvatar() {
+    var f = $('la');
+    if (f) { f.src = 'about:blank'; f.remove(); }   // closing the window ends the conversation
+    if (document.fullscreenElement) { try { document.exitFullscreen(); } catch (e) {} }
+  }
+
+  function finish() {
+    if (ended) return;
+    ended = true;
+    clearInterval(ticker);
+    removeAvatar();
+    show('step-done');
+    $('step-done').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function startAvatar() {
+    var f = document.createElement('iframe');
+    f.id = 'la';
+    f.title = 'EU AI Act tutor';
+    f.allow = 'microphone; fullscreen';
+    f.setAttribute('allowfullscreen', '');
+    f.src = AVATAR;
+    $('stage').appendChild(f);
+
+    var left = SECONDS;
+    draw(left);
+    ticker = setInterval(function () {
+      left--; draw(left);
+      if (left <= 0) finish();
+    }, 1000);
+  }
+
+  // Step 1 → Step 2
+  $('lead-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form = e.target, btn = $('start-btn');
+    var data = new FormData(form);
+    if (data.get('website')) return;   // a bot filled the hidden box
+    $('form-error').textContent = '';
+    btn.disabled = true; btn.textContent = 'Starting…';
+
+    // Pre-fill the thank-you message form
+    $('c-name').value = data.get('name');
+    $('c-email').value = data.get('email');
+
+    // Send the details to Netlify (which emails them to you). Start either way.
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString()
+    }).catch(function (err) { console.error('Lead not saved', err); });
+
+    show('step-chat');
+    $('lede').classList.add('hidden');
+    startAvatar();
+    $('step-chat').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  $('end-btn').addEventListener('click', finish);
+
+  $('full-btn').addEventListener('click', function () {
+    var s = $('stage');
+    if (s.requestFullscreen) s.requestFullscreen();
+    else if (s.webkitRequestFullscreen) s.webkitRequestFullscreen();
+  });
+
+  // Message form on the thank-you screen
+  $('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target, btn = $('c-send'), out = $('c-result');
+    var data = new FormData(f);
+    if (data.get('website')) return;
+    btn.disabled = true; btn.textContent = 'Sending…';
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString()
+    }).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      f.querySelectorAll('input, textarea, button').forEach(function (el) { el.disabled = true; });
+      btn.textContent = 'Sent';
+      out.textContent = "Thank you — your message is on its way. We'll be in touch shortly.";
+    }).catch(function () {
+      btn.disabled = false; btn.textContent = 'Send message';
+      out.textContent = "Sorry, that didn't send. Please use option 3 below instead.";
+    });
+  });
+
+  $('copy-btn').addEventListener('click', function () {
+    var b = $('copy-btn');
+    navigator.clipboard.writeText('kenn.joyce@aiadvisers.io')
+      .then(function () { b.textContent = 'Copied'; })
+      .catch(function () { b.textContent = 'Select the address to copy'; });
+  });
+
+  window.addEventListener('pagehide', removeAvatar);
+})();
 </script>
 
 </body>
