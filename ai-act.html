@@ -198,11 +198,12 @@
       <strong id="minutesText">three minutes</strong> with it. You'll need a microphone.
     </p>
 
-    <!-- STEP 1: sign-up. Netlify collects these and emails them to you. -->
+    <!-- STEP 1: sign-up. Web3Forms emails these to Kenn. -->
     <section id="step-form" class="card">
-      <form id="lead-form" name="aiact-lead" method="POST" data-netlify="true" netlify-honeypot="website">
-        <input type="hidden" name="form-name" value="aiact-lead">
-        <p class="hidden"><label>Leave this empty <input name="website"></label></p>
+      <form id="lead-form">
+        <input type="hidden" name="Started" id="started" value="">
+        <input type="hidden" name="Page" value="EU AI Act tutor (ime.ceo/ai-act.html)">
+        <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off">
         <label for="name">Your name</label>
         <input id="name" name="name" required autocomplete="name">
         <label for="email">Work email</label>
@@ -243,9 +244,8 @@
       <div class="opt">
         <span class="num">2</span>
         <div style="flex:1"><strong>Send a message from here</strong>
-          <form id="contact-form" name="aiact-contact" method="POST" data-netlify="true" netlify-honeypot="website">
-            <input type="hidden" name="form-name" value="aiact-contact">
-            <p class="hidden"><label>Leave this empty <input name="website"></label></p>
+          <form id="contact-form">
+            <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off">
             <label for="c-name">Your name</label>
             <input id="c-name" name="name" required>
             <label for="c-email">Email</label>
@@ -306,9 +306,21 @@
   // ===== SETTINGS YOU CAN CHANGE =====
   var SECONDS = 180;   // length of each conversation (180 = three minutes)
   var AVATAR = 'https://embed.liveavatar.com/v1/423ad6c1-ce37-40aa-8637-097255efddc9?orientation=horizontal';
+  var WEB3FORMS_KEY = 'c9175657-3396-47b9-bf4b-696401950b90';   // same key as the rest of ime.ceo
   // ===================================
 
   var $ = function (id) { return document.getElementById(id); };
+
+  // Send a form to Web3Forms, which emails it to Kenn
+  function sendToKenn(data, subject) {
+    data.append('access_key', WEB3FORMS_KEY);
+    data.append('subject', subject);
+    data.append('from_name', 'EU AI Act tutor — ime.ceo');
+    return fetch('https://api.web3forms.com/submit', {
+      method: 'POST', headers: { 'Accept': 'application/json' }, body: data
+    }).then(function (r) { return r.json(); })
+      .then(function (out) { if (!out.success) throw new Error(out.message || 'send failed'); return out; });
+  }
   var ticker = null, ended = false;
 
   // Keep the wording on the page in step with SECONDS
@@ -361,8 +373,11 @@
   $('lead-form').addEventListener('submit', function (e) {
     e.preventDefault();
     var form = e.target, btn = $('start-btn');
+    $('started').value = new Date().toLocaleString('en-IE', {
+      timeZone: 'Europe/Dublin', dateStyle: 'full', timeStyle: 'short'
+    }) + ' (Irish time)';
     var data = new FormData(form);
-    if (data.get('website')) return;   // a bot filled the hidden box
+    if (data.get('botcheck')) return;   // a bot ticked the hidden box
     $('form-error').textContent = '';
     btn.disabled = true; btn.textContent = 'Starting…';
 
@@ -370,12 +385,9 @@
     $('c-name').value = data.get('name');
     $('c-email').value = data.get('email');
 
-    // Send the details to Netlify (which emails them to you). Start either way.
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(data).toString()
-    }).catch(function (err) { console.error('Lead not saved', err); });
+    // Email the visitor's details to Kenn. The tutor starts either way.
+    sendToKenn(data, 'EU AI Act tutor — ' + data.get('name') + ' (' + (data.get('company') || 'no company given') + ')')
+      .catch(function (err) { console.error('Lead not sent', err); });
 
     show('step-chat');
     $('lede').classList.add('hidden');
@@ -396,14 +408,9 @@
     e.preventDefault();
     var f = e.target, btn = $('c-send'), out = $('c-result');
     var data = new FormData(f);
-    if (data.get('website')) return;
+    if (data.get('botcheck')) return;
     btn.disabled = true; btn.textContent = 'Sending…';
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(data).toString()
-    }).then(function (r) {
-      if (!r.ok) throw new Error(r.status);
+    sendToKenn(data, 'EU AI Act tutor — message from ' + data.get('name')).then(function () {
       f.querySelectorAll('input, textarea, button').forEach(function (el) { el.disabled = true; });
       btn.textContent = 'Sent';
       out.textContent = "Thank you — your message is on its way. We'll be in touch shortly.";
