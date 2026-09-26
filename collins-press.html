@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Michael Collins — Press Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1211;
+    --panel: #171c1a;
+    --line: #2a322f;
+    --text: #ece8df;
+    --muted: #9aa39e;
+    --accent: #3f8f5f;
+    --accent-2: #c9a24a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 40px 16px 60px; }
+  h1 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: clamp(2rem, 6vw, 3rem); margin: 0 0 6px; letter-spacing: .01em; }
+  .tag { display: inline-block; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-2); border: 1px solid var(--accent-2); border-radius: 999px; padding: 4px 10px; margin-bottom: 14px; }
+  .sub { color: var(--muted); margin: 0 0 28px; line-height: 1.5; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+  label { display: block; font-size: .85rem; color: var(--muted); margin: 14px 0 6px; }
+  input { width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line); background: #0c0f0e; color: var(--text); font-size: 1rem; }
+  input:focus { outline: 2px solid var(--accent); border-color: transparent; }
+  button { margin-top: 20px; width: 100%; padding: 14px; border: 0; border-radius: 8px; background: var(--accent); color: #fff; font-size: 1rem; font-weight: 500; cursor: pointer; }
+  button:disabled { opacity: .6; cursor: wait; }
+  .note { font-size: .8rem; color: var(--muted); margin-top: 12px; line-height: 1.4; }
+  .error { color: #e07a6a; font-size: .9rem; margin-top: 12px; min-height: 1em; }
+  .hidden { display: none !important; }
+  .stage { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #000; aspect-ratio: 16 / 9; }
+  .stage video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; }
+  .status { color: var(--muted); font-size: .9rem; }
+  .timer { font-variant-numeric: tabular-nums; font-weight: 500; color: var(--accent-2); }
+  .end-btn { width: auto; margin: 0; padding: 10px 16px; background: transparent; border: 1px solid var(--line); color: var(--text); }
+  .prompts { margin-top: 18px; }
+  .prompts-label { color: var(--muted); font-size: .85rem; margin: 0 0 8px; }
+  .prompt { font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.2rem; line-height: 1.4; margin: 0 0 10px; padding: 12px 16px; border-left: 3px solid var(--accent-2); background: var(--panel); border-radius: 0 8px 8px 0; }
+  .done h2 { font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.8rem; margin: 0 0 8px; }
+  .done a { color: var(--accent-2); }
+  .email-addr { display: inline-block; margin-top: 8px; font-size: 1.1rem; color: var(--accent-2); user-select: all; word-break: break-all; }
+  .again { width: auto; padding: 10px 16px; background: transparent; border: 1px solid var(--line); color: var(--text); }
+</style>
+</head>
+<body>
+<main>
+  <span class="tag">Press preview</span>
+  <h1>Michael Collins</h1>
+  <p class="sub">A live conversation with an AI recreation of Michael Collins, built by AI Advisers. Enter the press access code you were given for a five-minute session. You'll need a microphone.</p>
+
+  <!-- Step 1: access code -->
+  <section id="step-form" class="card">
+    <form id="press-form" method="POST" name="collins-press" data-netlify="true" netlify-honeypot="website">
+      <input type="hidden" name="form-name" value="collins-press">
+      <p class="hidden"><label>Leave this empty <input name="website"></label></p>
+      <label for="name">Your name</label>
+      <input id="name" name="name" required autocomplete="name">
+      <label for="outlet">Publication or programme</label>
+      <input id="outlet" name="outlet" required autocomplete="organization">
+      <label for="code">Press access code</label>
+      <input id="code" name="code" required autocomplete="off" autocapitalize="characters">
+      <button id="start-btn" type="submit">Start the conversation</button>
+      <div id="form-error" class="error"></div>
+      <p class="note">Don't have a code? Email kenn.joyce@aiadvisers.io.</p>
+    </form>
+  </section>
+
+  <!-- Step 2: the avatar -->
+  <section id="step-chat" class="hidden">
+    <div class="stage"><video id="persona-video" autoplay playsinline></video></div>
+    <div class="bar">
+      <span class="status" id="status">Connecting…</span>
+      <span class="timer" id="timer">5:00</span>
+      <button class="end-btn" id="end-btn" type="button">End</button>
+    </div>
+    <div class="prompts">
+      <p class="prompts-label">Some questions to get started:</p>
+      <p class="prompt">“What was going through your mind the night you signed the Treaty in London?”</p>
+      <p class="prompt">“What do you make of Dev staying at home while you went to London?”</p>
+      <p class="prompt">“If you could walk through Ireland today, what would make you proudest, and what would disappoint you?”</p>
+    </div>
+  </section>
+
+  <!-- Step 3: thank you -->
+  <section id="step-done" class="card done hidden">
+    <h2>Thank you for talking with Michael.</h2>
+    <p class="sub">For interviews, a longer demo, or questions about how it was made, contact Kenn Joyce, founder of AI Advisers:</p>
+    <span class="email-addr">kenn.joyce@aiadvisers.io</span>
+    <p><button type="button" class="again" id="again-btn">Start another session</button></p>
+  </section>
+</main>
+
+<script type="module">
+  import { createClient } from "https://esm.sh/@anam-ai/js-sdk@latest";
+
+  const $ = (id) => document.getElementById(id);
+  const form = $("press-form");
+  let client = null, ticker = null, ended = false;
+
+  function show(step) {
+    ["step-form", "step-chat", "step-done"].forEach((s) => $(s).classList.toggle("hidden", s !== step));
+  }
+
+  async function finish() {
+    if (ended) return;
+    ended = true;
+    clearInterval(ticker);
+    try { if (client) await client.stopStreaming(); } catch (e) {}
+    show("step-done");
+  }
+
+  function startTimer(seconds) {
+    let left = seconds;
+    const draw = () => { $("timer").textContent = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}`; };
+    draw();
+    ticker = setInterval(() => { left--; draw(); if (left <= 0) finish(); }, 1000);
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    $("form-error").textContent = "";
+    const btn = $("start-btn");
+    const data = new FormData(form);
+    if (data.get("website")) return; // bot
+    btn.disabled = true; btn.textContent = "Starting…";
+
+    try {
+      // 1. Check the code and get a session
+      const res = await fetch("/.netlify/functions/anam-press-token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: data.get("code") }),
+      });
+      if (res.status === 401) {
+        btn.disabled = false; btn.textContent = "Start the conversation";
+        $("form-error").textContent = "That access code isn't right. Please check it and try again.";
+        return;
+      }
+      if (!res.ok) throw new Error("token");
+      const { sessionToken, seconds } = await res.json();
+
+      // 2. Log who used it (name and outlet only, not the code)
+      const log = new URLSearchParams({
+        "form-name": "collins-press",
+        name: data.get("name"),
+        outlet: data.get("outlet"),
+      });
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: log.toString(),
+      }).catch(() => {});
+
+      // 3. Start the avatar
+      ended = false;
+      show("step-chat");
+      client = createClient(sessionToken);
+      await client.streamToVideoElement("persona-video");
+      $("status").textContent = "Live — go ahead and speak";
+      startTimer(seconds || 300);
+    } catch (err) {
+      console.error(err);
+      show("step-form");
+      btn.disabled = false; btn.textContent = "Start the conversation";
+      $("form-error").textContent = "Sorry, that didn't connect. Please check your microphone is allowed and try again.";
+    }
+  });
+
+  $("end-btn").addEventListener("click", finish);
+
+  $("again-btn").addEventListener("click", () => {
+    const btn = $("start-btn");
+    btn.disabled = false; btn.textContent = "Start the conversation";
+    $("timer").textContent = "5:00";
+    $("status").textContent = "Connecting…";
+    show("step-form");
+  });
+
+  window.addEventListener("pagehide", () => { try { client && client.stopStreaming(); } catch (e) {} });
+</script>
+</body>
+</html>
