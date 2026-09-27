@@ -60,8 +60,10 @@
       <p class="hidden"><label>Leave this empty <input name="website"></label></p>
       <label for="name">Your name</label>
       <input id="name" name="name" required autocomplete="name">
+      <label for="email">Work email</label>
+      <input id="email" name="email" type="email" required autocomplete="email">
       <label for="outlet">Publication or programme</label>
-      <input id="outlet" name="outlet" required autocomplete="organization">
+      <input id="outlet" name="company" required autocomplete="organization">
       <label for="code">Press access code</label>
       <input id="code" name="code" required autocomplete="off" autocapitalize="characters">
       <button id="start-btn" type="submit">Start the conversation</button>
@@ -144,11 +146,12 @@
       if (!res.ok) throw new Error("token");
       const { sessionToken, seconds } = await res.json();
 
-      // 2. Log who used it (name and outlet only, not the code)
+      // 2. Log who used it (name, email and outlet only, not the code)
       const log = new URLSearchParams({
         "form-name": "collins-press",
         name: data.get("name"),
-        outlet: data.get("outlet"),
+        email: data.get("email"),
+        company: data.get("company"),
       });
       fetch("/", {
         method: "POST",
