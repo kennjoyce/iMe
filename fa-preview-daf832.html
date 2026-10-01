@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#0b3a6e">
+<title>First Available — private preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#0b3a6e;--brand-strong:#072a52;--brand-soft:#eaf1f8;--ink:#16202c;--muted:#4f5d6d;--line:#d6dee7;--surface:#f5f7fa;--alert:#9f1c1c;--alert-soft:#fdf3f2;--ok:#1b6038;--ok-soft:#eef7f1;--caution:#7a5300;--caution-soft:#fdf7e8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+main{flex:1}
+h1,h2,h3,p,ul,ol,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:var(--brand)}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.page{width:100%;max-width:44rem;margin:0 auto;padding:1.5rem 1rem 0}
+.wide{width:100%;max-width:72rem;margin:0 auto;padding:0 1rem}
+.h1{font-size:1.625rem;font-weight:600;line-height:1.2}
+.h1-big{font-size:2rem;font-weight:600;line-height:1.15;letter-spacing:-.01em}
+.h2{font-size:1.25rem;font-weight:600}
+.muted{color:var(--muted)}
+.small{font-size:.9375rem}
+.mt1{margin-top:.25rem}.mt2{margin-top:.5rem}.mt3{margin-top:.75rem}.mt4{margin-top:1rem}.mt5{margin-top:1.25rem}.mt6{margin-top:1.5rem}.mt8{margin-top:2rem}.mt10{margin-top:2.5rem}
+.stack>*+*{margin-top:1.25rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:3rem;padding:.625rem 1.25rem;border-radius:.375rem;border:1px solid transparent;font:600 1rem/1.25 inherit;text-align:center;text-decoration:none;cursor:pointer}
+.btn-primary{background:var(--brand);color:#fff}.btn-primary:hover{background:var(--brand-strong)}
+.btn-secondary{background:#fff;color:var(--brand);border-color:var(--line)}.btn-secondary:hover{border-color:var(--brand)}
+.btn-danger{background:#fff;color:var(--alert);border-color:#e5c4c4}.btn-danger:hover{border-color:var(--alert)}
+.btn-small{min-height:2.5rem;padding:.4rem .9rem;font-size:.9375rem}
+.btn-block{width:100%}
+.btns{display:flex;flex-direction:column;gap:.75rem}
+@media(min-width:640px){.btns{flex-direction:row}.btn-block-sm{width:auto}}
+.input{display:block;width:100%;min-height:3rem;padding:.5rem .75rem;border:1px solid #b9c4d0;border-radius:.375rem;background:#fff;color:var(--ink);font:inherit;font-size:1rem}
+textarea.input{min-height:7rem}
+.input:focus{outline:3px solid var(--brand-soft);border-color:var(--brand)}
+.label{display:block;font-weight:600;margin-bottom:.375rem}
+.hint{display:block;color:var(--muted);font-size:.9375rem;margin-top:.25rem}
+.err{color:var(--alert);font-size:.9375rem;margin-top:.25rem}
+.check{display:flex;gap:.75rem;align-items:flex-start}
+.check input{width:1.25rem;height:1.25rem;margin-top:.2rem;flex-shrink:0;accent-color:var(--brand)}
+.card{background:#fff;border:1px solid var(--line);border-radius:.5rem;padding:1.25rem}
+.badge{display:inline-flex;align-items:center;padding:.125rem .5rem;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted);font-size:.8125rem;font-weight:600;white-space:nowrap}
+.badge-sample{background:var(--caution-soft);color:var(--caution);border-color:#ead9ab}
+.badge-ok{background:var(--ok-soft);color:var(--ok);border-color:#bfdcc9}
+.badge-alert{background:var(--alert-soft);color:var(--alert);border-color:#e3bcbc}
+.badges{display:flex;flex-wrap:wrap;gap:.375rem}
+.notice{border:1px solid #e3bcbc;border-left:4px solid var(--alert);background:var(--alert-soft);border-radius:.375rem;padding:1rem}
+.notice strong{color:var(--alert)}
+.notice a{color:var(--alert);font-weight:600}
+.box-ok{border:1px solid var(--ok);background:var(--ok-soft);border-radius:.375rem;padding:1rem}
+.box-ok .title{color:var(--ok);font-weight:600;font-size:1.2rem}
+.box-caution{border:1px solid #ead9ab;background:var(--caution-soft);border-radius:.375rem;padding:1rem}
+.box-caution .title{color:var(--caution);font-weight:600}
+.box-surface{background:var(--surface);border-radius:.375rem;padding:.875rem}
+.avatar{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:50%;border:1px solid var(--line);background:var(--brand-soft);color:var(--brand);font-weight:600}
+.row{display:flex;gap:1rem;align-items:flex-start}
+.first{margin-top:.75rem;border:2px solid var(--brand);border-radius:.5rem;padding:1.25rem}
+@media(min-width:640px){.first{padding:1.75rem}}
+.first .day{font-size:1.75rem;font-weight:600;line-height:1.15}
+.first .time{font-size:1.75rem;font-weight:600;line-height:1.15;color:var(--brand)}
+@media(min-width:640px){.first .day,.first .time{font-size:2.25rem}}
+.eyebrow{font-size:.9375rem;font-weight:700;letter-spacing:.04em;color:var(--brand);text-transform:uppercase}
+.divider{border-top:1px solid var(--line)}
+.list>li{border-bottom:1px solid var(--line)}.list{border-top:1px solid var(--line)}
+.result{display:flex;gap:1rem;align-items:flex-start;padding:1rem 0;text-decoration:none;color:inherit}
+.result:hover .name{text-decoration:underline}
+.result .name{color:var(--brand);font-weight:600}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.5rem}
+@media(min-width:640px){.slots{grid-template-columns:repeat(5,1fr)}}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:.375rem;padding:.25rem}
+.toggle a{padding:.5rem 1rem;border-radius:.25rem;font-weight:600;text-decoration:none}
+.toggle a.on{background:var(--brand);color:#fff}
+dl.grid{display:grid;gap:1rem}
+@media(min-width:640px){dl.grid{grid-template-columns:1fr 1fr}dl.grid .wide2{grid-column:span 2}}
+dt{font-size:.875rem;font-weight:600;color:var(--muted)}
+.sum{display:grid;grid-template-columns:4.5rem 1fr;gap:.5rem}
+.sum dt{font-size:1rem}
+details.card summary{cursor:pointer;font-weight:600;color:var(--brand)}
+.preview-bar{background:var(--caution-soft);color:var(--caution);border-bottom:1px solid var(--line);font-size:.875rem}
+.preview-bar .wide{display:flex;flex-wrap:wrap;gap:.25rem 1rem;align-items:center;justify-content:space-between;padding-top:.5rem;padding-bottom:.5rem}
+.preview-bar nav{display:flex;gap:.75rem;flex-wrap:wrap}
+.preview-bar a,.preview-bar button{color:var(--caution);font:600 .875rem inherit;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+header.site{border-bottom:1px solid var(--line)}
+header.site .wide{display:flex;height:4rem;align-items:center;justify-content:space-between}
+.logo{display:inline-flex;align-items:center;gap:.6rem;color:var(--brand);text-decoration:none;font-size:1.2rem;font-weight:600;letter-spacing:-.01em}
+footer{margin-top:4rem;border-top:1px solid var(--line);background:var(--surface);color:var(--muted);font-size:.9375rem}
+footer .wide{padding-top:2.5rem;padding-bottom:2.5rem}
+footer nav{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;margin-top:1.5rem}
+.steps li{display:flex;gap:1rem;margin-top:1rem}
+.steps .n{display:flex;width:2rem;height:2rem;flex-shrink:0;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--brand);color:var(--brand);font-weight:600}
+.facts li{margin-top:1rem}
+.facts strong{display:block}
+table{width:100%;border-collapse:collapse;font-size:.9375rem}
+th{text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding:.5rem .75rem .5rem 0;white-space:nowrap}
+td{border-bottom:1px solid var(--line);padding:.625rem .75rem .625rem 0;vertical-align:top}
+.scroll{overflow-x:auto}
+.tabs{display:flex;gap:1.5rem;border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}
+.tabs a{display:inline-block;padding:.75rem 0;font-weight:600;text-decoration:none}
+.tabs a.on{border-bottom:3px solid var(--brand)}
+.legal h2{font-size:1.2rem;font-weight:600;margin:1.75rem 0 .5rem}
+.legal p,.legal ul{margin-bottom:.875rem}
+.legal ul{list-style:disc;padding-left:1.25rem}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.dot{display:inline-block;width:.5rem;height:.5rem;border-radius:50%;background:var(--caution);margin-right:.6rem}
+</style>
+</head>
+<body>
+<div class="preview-bar">
+  <div class="wide">
+    <span><strong>Private preview.</strong> Demonstration only: consultants are fictional and no payments are taken.</span>
+    <nav aria-label="Preview">
+      <a href="#/">Patient view</a>
+      <a href="#/consultant">Consultant view</a>
+      <a href="#/admin">Admin view</a>
+      <button type="button" data-action="reset">Reset demo</button>
+    </nav>
+  </div>
+</div>
+<header class="site">
+  <div class="wide">
+    <a class="logo" href="#/" aria-label="First Available — home">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect x="1" y="3" width="24" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M1 9h24" stroke="currentColor" stroke-width="2"/><path d="M7 1v5M19 1v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 16.5l3.2 3.2L18 13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      First Available
+    </a>
+    <a href="#/for-consultants" class="small muted" style="text-decoration:none">For consultants</a>
+  </div>
+</header>
+<main id="app" tabindex="-1"></main>
+<footer>
+  <div class="wide">
+    <p style="max-width:42rem">First Available is a booking service only. We do not give medical advice and we do not store medical information. In an emergency, call <strong style="color:var(--ink)">000</strong> or go to your nearest emergency department.</p>
+    <nav aria-label="Footer"><a href="#/terms">Terms of use</a><a href="#/privacy">Privacy policy</a><a href="#/complaints">Make a complaint</a><a href="#/for-consultants">For consultants</a></nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+"use strict";
+var TZ = "Australia/Sydney";
+
+/* ---------- Sample data (fictional) ---------- */
+var PLACES = [["Sydney","2000",-33.8688,151.2093],["Haymarket","2000",-33.8807,151.2045],["Surry Hills","2010",-33.8861,151.2111],["Darlinghurst","2010",-33.879,151.219],["Mascot","2020",-33.929,151.193],["Paddington","2021",-33.884,151.231],["Bondi Junction","2022",-33.892,151.25],["Bondi Beach","2026",-33.891,151.277],["Randwick","2031",-33.914,151.241],["Maroubra","2035",-33.95,151.24],["Glebe","2037",-33.879,151.186],["Leichhardt","2040",-33.883,151.157],["Balmain","2041",-33.858,151.179],["Newtown","2042",-33.897,151.179],["Five Dock","2046",-33.867,151.129],["Camperdown","2050",-33.889,151.177],["North Sydney","2060",-33.839,151.207],["St Leonards","2065",-33.823,151.194],["Crows Nest","2065",-33.826,151.201],["Lane Cove","2066",-33.815,151.168],["Chatswood","2067",-33.796,151.183],["Gordon","2072",-33.756,151.154],["Pymble","2073",-33.744,151.143],["Wahroonga","2076",-33.718,151.117],["Hornsby","2077",-33.704,151.099],["Frenchs Forest","2086",-33.748,151.23],["Mosman","2088",-33.829,151.244],["Neutral Bay","2089",-33.833,151.219],["Manly","2095",-33.797,151.288],["Dee Why","2099",-33.751,151.286],["Brookvale","2100",-33.767,151.271],["Mona Vale","2103",-33.677,151.303],["Ryde","2112",-33.815,151.104],["Macquarie Park","2113",-33.776,151.121],["Epping","2121",-33.773,151.082],["Eastwood","2122",-33.791,151.081],["Ashfield","2131",-33.888,151.125],["Burwood","2134",-33.877,151.104],["Strathfield","2135",-33.873,151.094],["Concord","2137",-33.859,151.103],["Auburn","2144",-33.849,151.033],["Westmead","2145",-33.807,150.988],["Blacktown","2148",-33.771,150.906],["Parramatta","2150",-33.815,151.001],["Baulkham Hills","2153",-33.758,150.992],["Bella Vista","2153",-33.741,150.954],["Castle Hill","2154",-33.731,151.004],["Kellyville","2155",-33.71,150.956],["Rouse Hill","2155",-33.682,150.915],["Fairfield","2165",-33.872,150.956],["Liverpool","2170",-33.92,150.923],["Bankstown","2200",-33.917,151.035],["Marrickville","2204",-33.911,151.155],["Rockdale","2216",-33.953,151.137],["Kogarah","2217",-33.963,151.133],["Hurstville","2220",-33.967,151.102],["Miranda","2228",-34.034,151.101],["Cronulla","2230",-34.055,151.152],["Sutherland","2232",-34.031,151.058],["Campbelltown","2560",-34.065,150.814],["Camden","2570",-34.054,150.696],["Penrith","2750",-33.751,150.694],["Richmond","2753",-33.599,150.751],["Windsor","2756",-33.613,150.814]]
+  .map(function (p) { return { name: p[0], postcode: p[1], lat: p[2], lng: p[3] }; });
+
+var SAMPLES = [
+  ["Helen","Marsh","Sydney","Level 7, 135 Macquarie Street","Macquarie Street Urology",1,1,380,30,9,"MBBS (Syd), FRACS (Urology)","General urology, kidney stones and prostate conditions.",[1,2,4],"08:30","16:30",0],
+  ["Anand","Rao","Chatswood","Suite 12, 38 Albert Avenue","North Shore Urology Rooms",1,0,320,30,3,"MBBS (UNSW), FRACS (Urology)","General and functional urology.",[1,3,5],"09:00","17:00",0],
+  ["Sarah","Whitfield","Randwick","Suite 4, 66 High Street","Eastern Suburbs Urology",1,1,350,30,14,"MBBS (Hons), FRACS (Urology)","Female urology, continence and general urology.",[2,3,4],"08:00","15:00",0],
+  ["Michael","Tran","Kogarah","Level 2, 19 Kensington Street","St George Urology",1,0,290,30,5,"MBBS (Syd), FRACS (Urology)","General urology and kidney stones.",[1,2,3,4],"09:00","17:00",0],
+  ["Olivia","Grant","Westmead","Suite 6, 12 Hawkesbury Road","Westmead Specialist Rooms",1,1,300,30,2,"MBBS (WSU), FRACS (Urology)","General urology and men's health.",[1,2,5],"09:00","16:00",4],
+  ["James","Okafor","Liverpool","Suite 3, 45 Scott Street","South West Urology",1,0,280,30,6,"MBBS (UNSW), FRACS (Urology)","General urology and prostate conditions.",[2,4,5],"08:30","16:30",0],
+  ["Priya","Natarajan","St Leonards","Level 5, 20 Pacific Highway","Northside Urology Telehealth",0,1,260,20,1,"MBBS (Syd), FRACS (Urology)","Initial urology consultations by video.",[1,2,3,4,5],"12:00","18:00",0],
+  ["Thomas","Keller","Hornsby","Suite 9, 36 Burdett Street","Hornsby Urology",1,0,300,30,8,"MBBS (Adel), FRACS (Urology)","General urology and kidney stones.",[1,3,4],"09:00","17:00",0],
+  ["Rebecca","Lau","Bondi Junction","Level 3, 2 Oxford Street","Bondi Junction Urology",1,1,360,30,11,"MBBS (Hons), FRACS (Urology)","General urology and continence.",[2,3,5],"08:00","14:00",0],
+  ["Daniel","Moreno","Castle Hill","Suite 14, 7 Brisbane Road","Hills Urology",1,0,310,30,4,"MBBS (Syd), FRACS (Urology)","General urology and men's health.",[1,2,4,5],"09:00","17:00",0],
+  ["Grace","Holloway","Penrith","Suite 2, 5 Somerset Street","Nepean Urology",1,0,270,30,7,"MBBS (WSU), FRACS (Urology)","General urology.",[1,3,5],"08:30","16:00",0],
+  ["Nikhil","Mehta","Camperdown","Suite 10, 100 Carillon Avenue","Inner West Urology",1,1,340,30,10,"MBBS (Syd), FRACS (Urology)","General urology and kidney stones.",[2,3,4],"09:00","17:00",0],
+  ["Alex","Brennan","Burwood","Suite 1, 18 Railway Parade","Burwood Specialist Centre",1,1,295,30,1,"MBBS, FRACS (Urology)","General urology.",[1,2,3,4,5],"09:00","17:00",0,"pending"]
+];
+
+function freshState() {
+  return {
+    settings: { commission: 10, freeHours: 48, latePct: 0 },
+    consultants: SAMPLES.map(function (s, i) {
+      var place = findPlace(s[2]);
+      return {
+        id: "c" + (i + 1), first: s[0], last: s[1], suburb: place.name, postcode: place.postcode, lat: place.lat, lng: place.lng,
+        address: s[3], practice: s[4], inPerson: !!s[5], video: !!s[6], fee: s[7] * 100, minutes: s[8], backlog: s[9],
+        quals: s[10], bio: s[11], hours: s[12].map(function (d) { return { day: d, start: s[13], end: s[14] }; }),
+        cancels: s[15], status: s[16] || "active", reg: "MED00000" + String(10001 + i), notice: 12
+      };
+    }),
+    bookings: [], complaints: [], emails: []
+  };
+}
+var KEY = "fa-preview-state-v1";
+var state;
+try { state = JSON.parse(localStorage.getItem(KEY)); } catch (e) { state = null; }
+if (!state || !state.consultants) state = freshState();
+function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+/* ---------- Helpers ---------- */
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+function money(c) { return new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD", minimumFractionDigits: c % 100 ? 2 : 0 }).format(c / 100); }
+function findPlace(input) {
+  var q = String(input || "").trim().toLowerCase().replace(/\s+/g, " ");
+  if (!q) return null;
+  var pc = (q.match(/\b(\d{4})\b/) || [])[1];
+  var name = q.replace(/\b\d{4}\b/, "").replace(/,/g, "").trim();
+  var hit = null;
+  if (name) PLACES.some(function (p) { if (p.name.toLowerCase() === name && (!pc || p.postcode === pc)) { hit = p; return true; } return false; });
+  if (!hit && pc) PLACES.some(function (p) { if (p.postcode === pc) { hit = p; return true; } return false; });
+  return hit;
+}
+function km(a, b) {
+  var r = Math.PI / 180, dLat = (b.lat - a.lat) * r, dLng = (b.lng - a.lng) * r;
+  var h = Math.pow(Math.sin(dLat / 2), 2) + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.pow(Math.sin(dLng / 2), 2);
+  return 12742 * Math.asin(Math.sqrt(h));
+}
+function kmText(d) { return d < 1 ? "under 1 km away" : d < 10 ? d.toFixed(1) + " km away" : Math.round(d) + " km away"; }
+var WD = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+var partsFmt = new Intl.DateTimeFormat("en-AU", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23", weekday: "short" });
+function parts(d) { var o = {}; partsFmt.formatToParts(d).forEach(function (p) { o[p.type] = p.value; }); return { y: +o.year, m: +o.month, d: +o.day, h: +o.hour, mi: +o.minute, wd: WD[o.weekday] }; }
+function zoned(y, m, d, h, mi) {
+  var target = Date.UTC(y, m - 1, d, h, mi), g = target;
+  for (var i = 0; i < 3; i++) { var p = parts(new Date(g)); g += target - Date.UTC(p.y, p.m - 1, p.d, p.h, p.mi); }
+  return g;
+}
+function dayKey(t) { var p = parts(new Date(t)); return p.y + "-" + p.m + "-" + p.d; }
+function daysBetween(a, b) { var x = parts(new Date(a)), y = parts(new Date(b)); return Math.round((Date.UTC(y.y, y.m - 1, y.d) - Date.UTC(x.y, x.m - 1, x.d)) / 864e5); }
+function fTime(t) { return new Intl.DateTimeFormat("en-AU", { timeZone: TZ, hour: "numeric", minute: "2-digit" }).format(new Date(t)); }
+function fDate(t) { return new Intl.DateTimeFormat("en-AU", { timeZone: TZ, weekday: "long", day: "numeric", month: "long" }).format(new Date(t)); }
+function fShort(t) { return new Intl.DateTimeFormat("en-AU", { timeZone: TZ, weekday: "short", day: "numeric", month: "short" }).format(new Date(t)); }
+function fDay(t) { var d = daysBetween(Date.now(), t); return d === 0 ? "Today" : d === 1 ? "Tomorrow" : fDate(t); }
+function fWait(t) { var d = daysBetween(Date.now(), t); return d <= 0 ? "today" : d === 1 ? "tomorrow" : d < 14 ? "in " + d + " days" : "in " + Math.round(d / 7) + " weeks"; }
+function name(c) { return "Dr " + c.first + " " + c.last; }
+function byId(id) { for (var i = 0; i < state.consultants.length; i++) if (state.consultants[i].id === id) return state.consultants[i]; return null; }
+function types(c) { var t = []; if (c.inPerson) t.push("in-person"); if (c.video) t.push("video"); return t; }
+function newRef(p) { var a = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", s = ""; for (var i = 0; i < 6; i++) s += a[Math.floor(Math.random() * a.length)]; return (p || "FA") + "-" + s; }
+
+/* ---------- Availability: chosen hours minus calendar busy times minus bookings ---------- */
+function rng(seed) {
+  var h = 1779033703 ^ seed.length;
+  for (var i = 0; i < seed.length; i++) { h = Math.imul(h ^ seed.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); }
+  return function () { h = Math.imul(h ^ (h >>> 16), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); return ((h ^= h >>> 16) >>> 0) / 4294967296; };
+}
+function slotsFor(c, days) {
+  var out = [], now = Date.now(), earliest = now + c.notice * 36e5, len = c.minutes * 6e4, p0 = parts(new Date(now));
+  var taken = state.bookings.filter(function (b) { return b.cid === c.id && b.status === "confirmed"; });
+  for (var i = 0; i <= days; i++) {
+    var day = new Date(Date.UTC(p0.y, p0.m - 1, p0.d + i)), y = day.getUTCFullYear(), m = day.getUTCMonth() + 1, d = day.getUTCDate();
+    if (i < c.backlog) continue; // calendar fully booked these days
+    var rand = rng(c.id + ":" + y + "-" + m + "-" + d), busyHours = {};
+    for (var hr = 6; hr < 20; hr++) busyHours[hr] = rand() < 0.55;
+    c.hours.forEach(function (w) {
+      if (w.day !== day.getUTCDay()) return;
+      var s = w.start.split(":"), e = w.end.split(":");
+      var end = zoned(y, m, d, +e[0], +e[1]);
+      for (var t = zoned(y, m, d, +s[0], +s[1]); t + len <= end; t += len) {
+        if (t < earliest) continue;
+        var hour = parts(new Date(t)).h, hourEnd = parts(new Date(t + len - 1)).h;
+        if (busyHours[hour] || busyHours[hourEnd]) continue;
+        if (taken.some(function (b) { return t < b.end && b.start < t + len; })) continue;
+        out.push(t);
+      }
+    });
+  }
+  return out;
+}
+function nextSlot(c) { var s = slotsFor(c, 21); if (!s.length) s = slotsFor(c, 90); return s[0]; }
+function recentCancels(c) {
+  var since = Date.now() - 90 * 864e5;
+  return c.cancels + state.bookings.filter(function (b) { return b.cid === c.id && b.cancelledBy === "consultant" && b.cancelledAt > since; }).length;
+}
+function search(place, videoOk, excludeId) {
+  var now = Date.now();
+  return state.consultants.filter(function (c) { return c.status === "active" && c.id !== excludeId; }).map(function (c) {
+    var t = types(c).filter(function (x) { return x === "in-person" ? !!place : videoOk; });
+    if (!t.length) return null;
+    var s = nextSlot(c); if (!s) return null;
+    var dist = place ? km(place, c) : null;
+    // Ranking: soonest day, then nearest. Frequent consultant cancellations quietly add days (never shown to patients).
+    var eff = daysBetween(now, s) + Math.max(0, recentCancels(c) - 1) * 2;
+    return { c: c, slot: s, dist: dist, types: t, eff: eff };
+  }).filter(Boolean).sort(function (a, b) { return a.eff - b.eff || (a.dist || 0) - (b.dist || 0) || a.slot - b.slot; });
+}
+
+/* ---------- Shared pieces ---------- */
+function avatar(c, size) { return '<span class="avatar" aria-hidden="true" style="width:' + size + "px;height:" + size + "px;font-size:" + Math.round(size * .36) + 'px">' + esc(c.first[0] + c.last[0]) + "</span>"; }
+function typeBadges(t) { return t.map(function (x) { return '<span class="badge">' + (x === "video" ? "Video" : "In person") + "</span>"; }).join(""); }
+var SAMPLE = '<span class="badge badge-sample">Sample — fictional</span>';
+var EMERGENCY = '<aside class="notice" role="note" aria-label="Emergency information"><p><strong>If you have severe pain, heavy bleeding, chest pain or feel very unwell,</strong> go to your nearest emergency department or call <a href="tel:000">000</a> now.</p></aside>';
+function qs(o) { return Object.keys(o).filter(function (k) { return o[k] !== "" && o[k] != null; }).map(function (k) { return encodeURIComponent(k) + "=" + encodeURIComponent(o[k]); }).join("&"); }
+function terms() {
+  var s = state.settings;
+  return "You can cancel online. If you cancel more than " + s.freeHours + " hours before your appointment you receive a full refund. If you cancel later than that, " + (s.latePct ? s.latePct + "% of the fee is refunded" : "no refund is given") + ". If the consultant cancels, you receive a full refund straight away.";
+}
+function where(c, type, showLink) {
+  if (type === "video") return showLink ? 'Video appointment: <a href="#" onclick="return false">video link sent by the consultant</a>' : "Video appointment (link sent in your confirmation)";
+  return esc(c.practice) + "<br>" + esc(c.address) + ", " + esc(c.suburb) + " NSW " + c.postcode;
+}
+function summary(c, start, type, fee, showLink) {
+  return '<div class="card"><div class="row">' + avatar(c, 52) + '<div><p style="font-size:1.125rem;font-weight:600">' + esc(name(c)) + '</p><p class="muted">Urologist</p>' + SAMPLE + "</div></div>" +
+    '<dl class="mt4 divider" style="padding-top:1rem;display:grid;gap:.75rem">' +
+    '<div class="sum"><dt>When</dt><dd><strong>' + fDay(start) + ", " + fTime(start) + '</strong> <span class="muted">(' + c.minutes + " minutes, Sydney time)</span></dd></div>" +
+    '<div class="sum"><dt>Where</dt><dd>' + where(c, type, showLink) + "</dd></div>" +
+    '<div class="sum"><dt>Fee</dt><dd><strong>' + money(fee || c.fee) + '</strong> <span class="muted">paid in full</span></dd></div></dl></div>';
+}
+function searchForm(loc, video, label) {
+  return '<form data-form="search" class="stack">' +
+    '<div><label class="label" for="sp">Specialist</label><select id="sp" class="input"><option>Urologist (Urology)</option></select></div>' +
+    '<div><label class="label" for="loc">Your suburb or postcode</label><input id="loc" name="loc" class="input" list="places" autocomplete="postal-code" placeholder="For example, Parramatta or 2150" value="' + esc(loc || "") + '">' +
+    '<datalist id="places">' + PLACES.map(function (p) { return '<option value="' + p.name + " " + p.postcode + '">'; }).join("") + '</datalist><span class="hint">Currently available in Sydney only.</span></div>' +
+    '<div class="check"><input id="video" name="video" type="checkbox" value="1"' + (video ? " checked" : "") + '><label for="video"><strong>A video appointment is fine</strong><span class="hint" style="margin-top:0">Includes consultants who see patients by video. You can leave your suburb empty.</span></label></div>' +
+    '<button class="btn btn-primary btn-block btn-block-sm">' + (label || "Find the first available appointment") + "</button></form>";
+}
+function email(to, subject, body) { state.emails.unshift({ to: to, subject: subject, body: body, at: Date.now() }); }
+
+/* ---------- Pages ---------- */
+var pages = {};
+
+pages.home = function () {
+  return '<div class="page" style="padding-top:2rem"><h1 class="h1-big">See a specialist sooner</h1>' +
+    '<p class="mt3 muted" style="font-size:1.125rem">Find the first available private appointment with a registered consultant near you. You pay the consultant’s fee in full when you book.</p>' +
+    '<div class="mt6">' + EMERGENCY + '</div><section class="card mt6"><h2 class="sr-only">Search</h2>' + searchForm() + "</section>" +
+    '<section class="mt10"><h2 class="h2" style="font-size:1.375rem">How it works</h2><ol class="steps mt2">' +
+    '<li><span class="n">1</span><span><strong style="display:block">Search</strong><span class="muted">Tell us the type of specialist and your suburb or postcode.</span></span></li>' +
+    '<li><span class="n">2</span><span><strong style="display:block">Choose a time</strong><span class="muted">We show the soonest available appointment nearest to you first.</span></span></li>' +
+    '<li><span class="n">3</span><span><strong style="display:block">Book and pay</strong><span class="muted">Pay the consultant’s fee in full by card. You receive confirmation by email straight away.</span></span></li></ol></section>' +
+    '<section class="mt10 divider" style="padding-top:2rem"><h2 class="h2" style="font-size:1.375rem">What you can expect</h2><ul class="facts">' +
+    '<li><strong>Registered consultants only</strong><span class="muted">We check every consultant’s registration against the official AHPRA register before they can take bookings.</span></li>' +
+    '<li><strong>Fees shown up front</strong><span class="muted">You see the full fee before you book. Payment goes directly to the consultant.</span></li>' +
+    '<li><strong>A booking service, not medical advice</strong><span class="muted">We do not give medical advice and we do not ask for or store medical information.</span></li>' +
+    '<li><strong>Clear cancellation terms</strong><span class="muted">Cancel more than ' + state.settings.freeHours + ' hours ahead for a full refund. If the consultant cancels, you are refunded in full straight away.</span></li></ul></section></div>';
+};
+
+pages.results = function (q) {
+  var loc = (q.loc || "").trim(), video = q.video === "1", place = loc ? findPlace(loc) : null;
+  var again = '<div class="card mt6">' + searchForm(loc, video, "Search again") + "</div>";
+  if (loc && !place) return '<div class="page"><h1 class="h1">We couldn’t find that location</h1><p class="mt2 muted">We didn’t recognise “' + esc(loc) + '” as a suburb or postcode in Sydney. Please check it, or choose “A video appointment is fine”.</p>' + again + "</div>";
+  if (!place && !video) return '<div class="page"><h1 class="h1">Please tell us where you are</h1><p class="mt2 muted">Enter your suburb or postcode, or choose “A video appointment is fine”.</p>' + again + "</div>";
+  var res = search(place, video), ctx = { loc: place ? place.name + " " + place.postcode : "", video: video ? "1" : "" };
+  var html = '<div class="page"><p class="muted">Urologists ' + (place ? "near " + esc(ctx.loc) : "by video") + (place && video ? " (video appointments included)" : "") + "</p>" +
+    '<details class="card mt4"><summary>Change search</summary><div class="mt5">' + searchForm(loc, video, "Search again") + "</div></details>";
+  if (!res.length) return html + '<h1 class="h1 mt8">No appointments found</h1><p class="mt2 muted">Try including video appointments, or check again later.</p></div>';
+  var f = res[0], fc = f.c, ft = place && f.types.indexOf("in-person") >= 0 ? "in-person" : f.types[0];
+  html += '<section class="mt6"><h1 class="eyebrow">First available appointment</h1><div class="first">' +
+    '<p class="day">' + fDay(f.slot) + '</p><p class="time">' + fTime(f.slot) + '</p><p class="mt1 muted">Available ' + fWait(f.slot) + "</p>" +
+    '<div class="row mt5 divider" style="padding-top:1.25rem">' + avatar(fc, 56) + '<div><p style="font-size:1.125rem;font-weight:600">' + esc(name(fc)) + '</p><p class="muted">Urologist</p>' +
+    '<p class="mt1">' + (ft === "video" ? "Video appointment" : esc(fc.suburb) + (f.dist != null ? ' <span class="muted">· ' + kmText(f.dist) + "</span>" : "")) + "</p>" +
+    '<p class="mt1"><strong>' + money(fc.fee) + '</strong> <span class="muted">· ' + fc.minutes + ' minutes · paid in full when booking</span></p><div class="badges mt2">' + typeBadges(f.types) + SAMPLE + "</div></div></div>" +
+    '<div class="btns mt6"><a class="btn btn-primary" href="#/book?' + qs({ c: fc.id, t: f.slot, type: ft, loc: ctx.loc, video: ctx.video }) + '">Book this appointment</a>' +
+    '<a class="btn btn-secondary" href="#/c/' + fc.id + "?" + qs({ type: ft, loc: ctx.loc, video: ctx.video }) + '">See profile and other times</a></div></div></section>' +
+    '<div class="mt6">' + EMERGENCY + "</div>";
+  if (res.length > 1) {
+    html += '<section class="mt10"><h2 class="h2">Other available consultants</h2><p class="mt1 small muted">Ordered by soonest appointment, then distance.</p><ul class="list mt4">' +
+      res.slice(1).map(function (r) {
+        var c = r.c, ip = r.types.indexOf("in-person") >= 0;
+        return '<li><a class="result" href="#/c/' + c.id + "?" + qs(ctx) + '">' + avatar(c, 44) + '<div style="flex:1"><p class="name">' + esc(name(c)) + "</p><p>" + fDay(r.slot) + ", " + fTime(r.slot) + '</p><p class="small muted">' + (ip ? esc(c.suburb) : "Video") + (ip && r.dist != null ? " · " + kmText(r.dist) : "") + " · " + money(c.fee) + '</p><div class="badges mt1">' + typeBadges(r.types) + SAMPLE + '</div></div><span class="muted" aria-hidden="true" style="align-self:center">›</span></a></li>';
+      }).join("") + "</ul></section>";
+  }
+  return html + "</div>";
+};
+
+pages.consultantProfile = function (q, id) {
+  var c = byId(id);
+  if (!c || c.status !== "active") return '<div class="page"><h1 class="h1">Consultant not available</h1></div>';
+  var t = types(c), type = t.indexOf(q.type) >= 0 ? q.type : t[0], ctx = { loc: q.loc || "", video: q.video || "" };
+  var byDay = [], idx = {};
+  slotsFor(c, 45).some(function (s) { var k = dayKey(s); if (!(k in idx)) { if (byDay.length >= 5) return true; idx[k] = byDay.length; byDay.push([]); } byDay[idx[k]].push(s); return false; });
+  return '<div class="page"><a class="small" href="#/results?' + qs(ctx) + '">‹ Back to results</a>' +
+    '<section class="row mt4">' + avatar(c, 88) + '<div><h1 class="h1">' + esc(name(c)) + '</h1><p class="muted">Urologist</p><div class="badges mt2">' + typeBadges(t) + SAMPLE + "</div></div></section>" +
+    '<dl class="card grid mt6"><div><dt>Fee</dt><dd><strong>' + money(c.fee) + "</strong>, paid in full when booking</dd></div><div><dt>Appointment length</dt><dd>" + c.minutes + " minutes</dd></div>" +
+    "<div><dt>Qualifications</dt><dd>" + esc(c.quals) + "</dd></div><div><dt>Registration</dt><dd>" + c.reg + '<span class="hint">Checked against the AHPRA register</span></dd></div>' +
+    (c.inPerson ? '<div class="wide2"><dt>Practice address</dt><dd>' + where(c, "in-person") + "</dd></div>" : "") +
+    (c.video ? '<div class="wide2"><dt>Video appointments</dt><dd>Held using the consultant’s own video service. The link is in your confirmation email.</dd></div>' : "") +
+    '<div class="wide2"><dt>Practice focus</dt><dd>' + esc(c.bio) + "</dd></div></dl>" +
+    '<section class="mt8"><h2 class="h2">Choose a time</h2>' +
+    (t.length > 1 ? '<div class="toggle mt3" role="group" aria-label="Appointment type">' + t.map(function (x) { return '<a href="#/c/' + c.id + "?" + qs({ type: x, loc: ctx.loc, video: ctx.video }) + '" class="' + (x === type ? "on" : "") + '">' + (x === "video" ? "Video" : "In person") + "</a>"; }).join("") + "</div>" : "") +
+    byDay.map(function (d) { return '<div class="mt6"><h3 style="font-weight:600">' + fDay(d[0]) + '</h3><div class="slots">' + d.map(function (s) { return '<a class="btn btn-secondary btn-small" href="#/book?' + qs({ c: c.id, t: s, type: type, loc: ctx.loc, video: ctx.video }) + '">' + fTime(s) + "</a>"; }).join("") + "</div></div>"; }).join("") +
+    '<p class="mt4 small muted">All times are Sydney time.</p></section></div>';
+};
+
+pages.book = function (q) {
+  var c = byId(q.c), t = +q.t;
+  if (!c || !t) return '<div class="page"><h1 class="h1">This appointment is not available</h1><p class="mt2"><a href="#/">Search again</a></p></div>';
+  if (slotsFor(c, 90).indexOf(t) < 0) return '<div class="page"><h1 class="h1">Sorry, that time has just been taken</h1><p class="mt2"><a href="#/c/' + c.id + '">Choose another time</a></p></div>';
+  var pre = q.from ? state.bookings.filter(function (b) { return b.ref === q.from; })[0] : null;
+  return '<div class="page"><a class="small" href="#/c/' + c.id + "?" + qs({ type: q.type, loc: q.loc, video: q.video }) + '">‹ Choose a different time</a><h1 class="h1 mt3">Book your appointment</h1>' +
+    '<div class="mt5">' + summary(c, t, q.type) + '</div><div class="mt5">' + EMERGENCY + "</div>" +
+    '<section class="mt6"><h2 style="font-weight:600">Cancellation terms</h2><p class="mt1 muted">' + terms() + "</p></section>" +
+    '<section class="mt8"><h2 class="h2">Your contact details</h2><p class="mt1 muted">No account needed.</p>' +
+    '<form data-form="book" class="stack mt4" novalidate><input type="hidden" name="c" value="' + c.id + '"><input type="hidden" name="t" value="' + t + '"><input type="hidden" name="type" value="' + esc(q.type) + '"><input type="hidden" name="loc" value="' + esc(q.loc || "") + '"><input type="hidden" name="video" value="' + esc(q.video || "") + '"><input type="hidden" name="from" value="' + esc(pre ? pre.ref : "") + '">' +
+    '<div id="form-error"></div>' +
+    '<div><label class="label" for="name">Full name</label><input id="name" name="name" class="input" autocomplete="name" value="' + esc(pre ? pre.name : "") + '"></div>' +
+    '<div><label class="label" for="email">Email</label><input id="email" name="email" type="email" class="input" autocomplete="email" value="' + esc(pre ? pre.email : "") + '"><span class="hint">Your confirmation is sent here.</span></div>' +
+    '<div><label class="label" for="phone">Mobile phone</label><input id="phone" name="phone" type="tel" class="input" autocomplete="tel" value="' + esc(pre ? pre.phone : "") + '"><span class="hint">In case the consultant’s rooms need to contact you.</span></div>' +
+    '<p class="box-surface small muted">We only need your contact details. Please do not send us any medical information — you can discuss your health with the consultant at your appointment.</p>' +
+    '<div class="check"><input id="agree" name="agree" type="checkbox" value="1"><label for="agree">I understand First Available is a booking service and does not give medical advice. I agree to the <a href="#/terms">terms of use</a>, the cancellation terms above, and the <a href="#/privacy">privacy policy</a>.</label></div>' +
+    '<button class="btn btn-primary btn-block">Continue to payment (' + money(c.fee) + ")</button></form>" +
+    '<p class="mt4 small muted">Your time is held for 30 minutes while you pay. Payments are processed securely by Stripe and paid directly to the consultant.</p></section></div>';
+};
+
+pages.pay = function (q, ref) {
+  var b = findBooking(ref); if (!b) return notFound();
+  if (b.status !== "pending") { location.hash = "#/booking/" + b.ref; return ""; }
+  var c = byId(b.cid);
+  return '<div class="page"><h1 class="h1">Payment</h1><div class="mt5">' + summary(c, b.start, b.type, b.fee) + '</div><div class="mt5">' + EMERGENCY + "</div>" +
+    '<div class="box-caution mt5"><p class="title">Demonstration payment</p><p class="mt1 small">In the live service, patients pay by card through Stripe and the money goes directly to the consultant. Nothing is charged here.</p></div>' +
+    '<button class="btn btn-primary btn-block mt6" data-action="pay" data-ref="' + b.ref + '">Pay ' + money(b.fee) + " (demonstration)</button></div>";
+};
+
+function findBooking(ref) { return state.bookings.filter(function (b) { return b.ref === ref; })[0]; }
+function refundFor(b) { var hrs = (b.start - Date.now()) / 36e5; return hrs > state.settings.freeHours ? b.fee : Math.round(b.fee * state.settings.latePct / 100); }
+
+pages.booking = function (q, ref) {
+  var b = findBooking(ref); if (!b) return notFound();
+  var c = byId(b.cid), html = '<div class="page">';
+  if (b.status === "confirmed" && q.new === "1") html += '<div class="box-ok" role="status" style="margin-bottom:1.5rem"><p class="title">Your appointment is booked</p><p class="mt1">We have sent a confirmation to <strong>' + esc(b.email) + '</strong>. Keep it — it has a link back to this page.</p></div>';
+  html += '<h1 class="h1">' + (b.status === "cancelled" ? "This booking has been cancelled" : b.status === "pending" ? "Payment not completed" : "Your booking") + '</h1><p class="mt1 muted">Reference ' + b.ref + "</p>" +
+    '<div class="mt5">' + summary(c, b.start, b.type, b.fee, b.status === "confirmed") + "</div>";
+  if (b.status === "pending") html += '<p class="mt5">Your payment has not been completed, so this time is not yet booked. <a href="#/pay/' + b.ref + '">Continue to payment</a></p>';
+  if (b.status === "confirmed") {
+    var r = refundFor(b);
+    html += '<section class="mt6"><h2 style="font-weight:600">Cancellation terms</h2><p class="mt1 muted">' + terms() + "</p></section>" +
+      '<section class="mt6 divider" style="padding-top:1.5rem"><h2 style="font-weight:600">Need to cancel?</h2><p class="mt1 muted">If you cancel now you will receive ' + (r === b.fee ? "a full refund of " + money(r) : r ? "a refund of " + money(r) : "no refund") + '.</p><a class="btn btn-danger mt3" href="#/booking/' + b.ref + '/cancel">Cancel this appointment</a></section>' +
+      '<div class="mt8">' + EMERGENCY + "</div>" +
+      '<div class="box-caution mt8"><p class="title">Preview tip</p><p class="mt1 small">To see what happens when a consultant cancels, open the <a href="#/consultant?id=' + c.id + '">consultant view for ' + esc(name(c)) + "</a> and cancel this booking.</p></div>";
+  }
+  if (b.status === "cancelled") {
+    html += '<p class="mt5">' + (b.cancelledBy === "patient" ? "You cancelled this appointment. " : "The consultant was unable to keep this appointment. We are sorry. ") +
+      (b.refund ? "A refund of " + money(b.refund) + " has been issued to your card. It usually appears within 5–10 business days." : "No refund applied under the cancellation terms.") + "</p>";
+    if (b.cancelledBy !== "patient") {
+      var place = findPlace(b.loc) || findPlace(c.postcode), alt = search(b.type === "in-person" ? place : null, b.video || b.type === "video", c.id)[0];
+      html += '<section class="mt8" id="rebook"><h2 class="h2">Next available appointment</h2>';
+      if (!alt) html += '<p class="mt2 muted">There are no other appointments available right now. <a href="#/">Search again</a></p>';
+      else {
+        var ac = alt.c, at = alt.types.indexOf(b.type) >= 0 ? b.type : alt.types[0];
+        html += '<div class="first"><p class="day" style="font-size:1.5rem">' + fDay(alt.slot) + '</p><p class="time" style="font-size:1.5rem">' + fTime(alt.slot) + "</p>" +
+          '<div class="row mt4">' + avatar(ac, 48) + '<div><p style="font-weight:600">' + esc(name(ac)) + '</p><p class="muted">Urologist · ' + (at === "video" ? "Video" : esc(ac.suburb)) + (alt.dist != null && at === "in-person" ? " · " + kmText(alt.dist) : "") + '</p><p class="mt1"><strong>' + money(ac.fee) + "</strong></p></div></div>" +
+          '<a class="btn btn-primary btn-block mt5" href="#/book?' + qs({ c: ac.id, t: alt.slot, type: at, loc: b.loc, video: b.video ? "1" : "", from: b.ref }) + '">Rebook with ' + esc(name(ac)) + '</a><p class="mt2 small muted">Your details are filled in for you.</p></div>';
+      }
+      html += "</section>";
+    }
+  }
+  return html + "</div>";
+};
+
+pages.cancel = function (q, ref) {
+  var b = findBooking(ref); if (!b || b.status !== "confirmed") return notFound();
+  var c = byId(b.cid), r = refundFor(b);
+  return '<div class="page"><h1 class="h1">Cancel your appointment?</h1><p class="mt3">' + esc(name(c)) + ", " + fDate(b.start) + " at " + fTime(b.start) + ".</p>" +
+    '<p class="mt3 box-surface">' + (r === b.fee ? "You will receive a <strong>full refund of " + money(r) + "</strong>." : r ? "You will receive a <strong>refund of " + money(r) + "</strong>." : "Your appointment is less than the free-cancellation period away, so <strong>no refund</strong> applies.") + "</p>" +
+    '<div class="btns mt6"><button class="btn btn-danger" data-action="cancel" data-by="patient" data-ref="' + b.ref + '">Yes, cancel my appointment</button><a class="btn btn-secondary" href="#/booking/' + b.ref + '">No, keep it</a></div></div>';
+};
+
+pages.forConsultants = function () {
+  return '<div class="page" style="padding-top:2rem"><h1 class="h1-big">For consultants</h1><p class="mt3 muted" style="font-size:1.125rem">Offer your free appointment times to patients who are ready to pay privately and want to be seen soon.</p>' +
+    '<div class="btns mt6"><a class="btn btn-primary" href="#/consultant">See the consultant dashboard (preview)</a></div>' +
+    '<h2 class="h2 mt10" style="font-size:1.375rem">How it works</h2><ul class="facts">' +
+    "<li><strong>Your registration is checked</strong><span class=\"muted\">We verify your registration on the AHPRA register before your profile is shown to anyone.</span></li>" +
+    "<li><strong>Connect your calendar — free/busy only</strong><span class=\"muted\">Google Calendar or Microsoft Outlook. We read only whether a time is busy or free. We never read event titles, descriptions or attendees, so your other patients’ details stay private.</span></li>" +
+    "<li><strong>You decide what to offer</strong><span class=\"muted\">Choose your days and hours, appointment length, fee, and whether you see patients in person, by video, or both.</span></li>" +
+    "<li><strong>Bookings go straight into your calendar</strong><span class=\"muted\">So the time can’t be double-booked.</span></li>" +
+    "<li><strong>Paid in full, directly to you</strong><span class=\"muted\">Patients pay your full fee when they book, through Stripe, into your own Stripe account. First Available’s commission (" + state.settings.commission + "%) is deducted automatically.</span></li></ul></div>";
+};
+
+pages.consultant = function (q) {
+  var active = state.consultants.filter(function (c) { return c.status === "active"; });
+  var c = byId(q.id) || byId("c10");
+  var now = Date.now(), mine = state.bookings.filter(function (b) { return b.cid === c.id && b.status === "confirmed" && b.end > now; }).sort(function (a, b) { return a.start - b.start; });
+  return '<div class="wide" style="padding-top:1.5rem;max-width:48rem"><div class="box-caution"><p class="small"><strong>Preview:</strong> you are seeing the dashboard as <label for="who" class="sr-only">Consultant</label><select id="who" data-action="who" class="input" style="display:inline-block;width:auto;min-height:2.25rem;padding:.2rem .5rem">' +
+    active.map(function (x) { return '<option value="' + x.id + '"' + (x.id === c.id ? " selected" : "") + ">" + esc(name(x)) + "</option>"; }).join("") + "</select></p></div>" +
+    '<nav class="tabs mt4" aria-label="Consultant"><a class="on" href="#/consultant?id=' + c.id + '">Overview</a><a href="#" onclick="return false">Profile and fees</a><a href="#" onclick="return false">Hours</a><a href="#" onclick="return false">Calendar</a><a href="#" onclick="return false">Payments</a></nav>' +
+    '<h1 class="h1 mt8">Overview</h1><section class="mt6"><h2 class="h2">Visible to patients</h2><p class="box-ok mt2" style="color:var(--ok)">Yes — patients can find and book you. <a href="#/c/' + c.id + '">View your public profile</a></p></section>' +
+    '<dl class="card grid mt6"><div><dt>Calendar</dt><dd>Google Calendar — free/busy only</dd></div><div><dt>Payments</dt><dd>Stripe, paid directly to you</dd></div><div><dt>Hours offered</dt><dd>' + c.hours.map(function (h) { return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][h.day]; }).join(", ") + ", " + c.hours[0].start + "–" + c.hours[0].end + "</dd></div><div><dt>Fee and length</dt><dd>" + money(c.fee) + ", " + c.minutes + " minutes</dd></div></dl>" +
+    '<section class="mt10"><h2 class="h2">Upcoming First Available bookings</h2>' +
+    (mine.length ? '<ul class="list mt3">' + mine.map(function (b) {
+      return '<li style="display:flex;flex-wrap:wrap;gap:.75rem;justify-content:space-between;align-items:center;padding:1rem 0"><div><p style="font-weight:600">' + fShort(b.start) + ", " + fTime(b.start) + ' <span class="badge">' + (b.type === "video" ? "Video" : "In person") + "</span></p><p>" + esc(b.name) + '</p><p class="small muted">' + esc(b.phone) + " · " + esc(b.email) + " · " + b.ref + " · " + money(b.fee) + ' paid</p></div><button class="btn btn-danger btn-small" data-action="cancel" data-by="consultant" data-ref="' + b.ref + '">Cancel</button></li>';
+    }).join("") + "</ul>" : '<p class="mt2 muted">No upcoming bookings. Make a booking with ' + esc(name(c)) + ' in the <a href="#/">patient view</a> and it will appear here.</p>') +
+    '<p class="mt3 small muted">If you cancel, the patient is refunded in full straight away and offered the next soonest available consultant. Cancellations are recorded by First Available.</p></section></div>';
+};
+
+pages.admin = function (q) {
+  var tab = q.tab || "consultants";
+  var nav = [["consultants", "Consultants"], ["bookings", "Bookings and payments"], ["complaints", "Complaints"], ["emails", "Emails"], ["settings", "Settings"]];
+  var html = '<div class="wide" style="padding-top:1.5rem"><p style="font-weight:600" class="muted">First Available admin</p><nav class="tabs mt3" aria-label="Admin">' +
+    nav.map(function (n) { return '<a class="' + (n[0] === tab ? "on" : "") + '" href="#/admin?tab=' + n[0] + '">' + n[1] + "</a>"; }).join("") + '</nav><div style="padding-top:2rem">';
+  if (tab === "consultants") {
+    var list = state.consultants.slice().sort(function (a, b) { return (b.status === "pending") - (a.status === "pending"); });
+    html += '<h1 class="h1">Consultants</h1><p class="mt1 muted" style="max-width:42rem">Before approving, search the registration number on the official AHPRA register and check the name, specialty and any conditions.</p><ul class="mt6" style="display:grid;gap:1rem">' +
+      list.map(function (c) {
+        var st = { pending: ["Waiting for check", "badge-sample"], active: ["Approved", "badge-ok"], paused: ["Paused", "badge-alert"], rejected: ["Rejected", "badge-alert"] }[c.status];
+        return '<li class="card"><div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem"><div><p style="font-size:1.125rem;font-weight:600">' + esc(name(c)) + ' <span class="badge">Sample</span></p><p class="small muted">' + esc(c.practice) + ", " + esc(c.suburb) + '</p></div><span class="badge ' + st[1] + '">' + st[0] + "</span></div>" +
+          '<p class="small mt3"><strong>Registration:</strong> ' + c.reg + ' <a href="https://www.ahpra.gov.au/Registration/Registers-of-Practitioners.aspx" target="_blank" rel="noopener noreferrer">Check on AHPRA ↗</a> · <strong>Fee:</strong> ' + money(c.fee) + " · <strong>Consultant cancellations (90 days, private):</strong> " + recentCancels(c) + "</p>" +
+          '<div class="btns mt4 divider" style="padding-top:1rem">' +
+          (c.status !== "active" ? '<button class="btn btn-primary btn-small" data-action="status" data-id="' + c.id + '" data-status="active">' + (c.status === "pending" ? "Approve — registration checked" : "Reactivate") + "</button>" : "") +
+          (c.status === "pending" ? '<button class="btn btn-danger btn-small" data-action="status" data-id="' + c.id + '" data-status="rejected">Reject</button>' : "") +
+          (c.status === "active" ? '<button class="btn btn-danger btn-small" data-action="status" data-id="' + c.id + '" data-status="paused">Pause</button>' : "") + "</div></li>";
+      }).join("") + "</ul>";
+  } else if (tab === "bookings") {
+    var bs = state.bookings.slice().reverse();
+    html += '<h1 class="h1">Bookings and payments</h1>' + (bs.length ? '<div class="scroll mt6"><table style="min-width:52rem"><thead><tr><th>Reference</th><th>Appointment</th><th>Consultant</th><th>Patient</th><th>Status</th><th>Paid</th><th>Commission</th><th>Refund</th></tr></thead><tbody>' +
+      bs.map(function (b) { var c = byId(b.cid); return "<tr><td><strong>" + b.ref + "</strong></td><td>" + fShort(b.start) + ", " + fTime(b.start) + "</td><td>" + esc(name(c)) + "</td><td>" + esc(b.name) + '<span class="hint">' + esc(b.email) + "</span></td><td>" + ({ pending: "Awaiting payment", confirmed: "Confirmed", cancelled: "Cancelled" }[b.status]) + (b.cancelledBy ? '<span class="hint">by ' + b.cancelledBy + "</span>" : "") + "</td><td>" + (b.paid ? money(b.fee) : "—") + "</td><td>" + (b.paid ? money(b.commission) : "—") + "</td><td>" + (b.refund ? money(b.refund) : "—") + "</td></tr>"; }).join("") + "</tbody></table></div>" : '<p class="mt6 muted">No bookings yet. Make one in the <a href="#/">patient view</a>.</p>');
+  } else if (tab === "complaints") {
+    html += '<h1 class="h1">Complaints</h1>' + (state.complaints.length ? '<ul class="mt6" style="display:grid;gap:1rem">' + state.complaints.map(function (c) { return '<li class="card"><p style="font-weight:600">' + c.ref + " — " + esc(c.about) + '</p><p class="small muted">' + esc(c.name) + " · " + esc(c.email) + '</p><p class="mt3" style="white-space:pre-wrap">' + esc(c.details) + "</p></li>"; }).join("") + "</ul>" : '<p class="mt6 muted">No complaints. Try the <a href="#/complaints">complaint form</a>.</p>');
+  } else if (tab === "emails") {
+    html += '<h1 class="h1">Emails</h1><p class="mt1 muted">Every email the system would send, most recent first.</p>' + (state.emails.length ? '<ul class="mt6" style="display:grid;gap:.75rem">' + state.emails.map(function (e) { return '<li><details class="card"><summary>' + esc(e.subject) + '<span class="hint" style="font-weight:400">To ' + esc(e.to) + "</span></summary><pre class=\"mt4 small\" style=\"white-space:pre-wrap;font-family:inherit\">" + esc(e.body) + "</pre></details></li>"; }).join("") + "</ul>" : '<p class="mt6 muted">No emails yet.</p>');
+  } else {
+    var s = state.settings;
+    html += '<div style="max-width:36rem"><h1 class="h1">Settings</h1><form data-form="settings" class="stack mt6"><div id="form-error"></div>' +
+      '<div><label class="label" for="commission">Commission (%)</label><input id="commission" name="commission" type="number" min="0" max="50" step="0.5" value="' + s.commission + '" class="input" style="max-width:10rem"><span class="hint">First Available’s share of each fee, taken automatically by Stripe.</span></div>' +
+      '<div><label class="label" for="freeHours">Free cancellation period (hours)</label><input id="freeHours" name="freeHours" type="number" min="0" max="336" value="' + s.freeHours + '" class="input" style="max-width:10rem"><span class="hint">Patients cancelling earlier than this get a full refund.</span></div>' +
+      '<div><label class="label" for="latePct">Refund for later cancellations (%)</label><input id="latePct" name="latePct" type="number" min="0" max="100" value="' + s.latePct + '" class="input" style="max-width:10rem"></div>' +
+      '<p class="small muted">When a consultant cancels, the patient always receives a full refund.</p><button class="btn btn-primary btn-block-sm">Save settings</button></form></div>';
+  }
+  return html + "</div></div>";
+};
+
+pages.complaints = function (q) {
+  if (q.ref) return '<div class="page" style="padding-top:2rem"><h1 class="h1-big">Make a complaint</h1><div class="box-ok mt6" role="status"><p class="title">Thank you. Your complaint has been received.</p><p class="mt1">Your reference is <strong>' + esc(q.ref) + "</strong>. We have emailed you a copy and will reply within 2 business days.</p></div></div>";
+  return '<div class="page" style="padding-top:2rem"><h1 class="h1-big">Make a complaint</h1><p class="mt3">We take every complaint seriously. Tell us what happened and a member of our team will reply within 2 business days.</p>' +
+    '<form data-form="complaint" class="card stack mt6" novalidate><div id="form-error"></div>' +
+    '<div><label class="label" for="cname">Your name</label><input id="cname" name="name" class="input" autocomplete="name"></div>' +
+    '<div><label class="label" for="cemail">Email</label><input id="cemail" name="email" type="email" class="input" autocomplete="email"></div>' +
+    '<div><label class="label" for="cref">Booking reference (optional)</label><input id="cref" name="bookingRef" class="input"></div>' +
+    '<div><label class="label" for="about">What is it about?</label><select id="about" name="about" class="input"><option value="">Choose one</option><option>A booking or appointment</option><option>A payment or refund</option><option>A consultant</option><option>The website</option><option>Privacy</option><option>Something else</option></select></div>' +
+    '<div><label class="label" for="details">What happened?</label><textarea id="details" name="details" class="input" maxlength="4000"></textarea><span class="hint">Please do not include medical information.</span></div>' +
+    '<button class="btn btn-primary btn-block-sm">Send complaint</button></form>' +
+    '<section class="legal mt10"><h2>How we handle complaints</h2><p class="box-caution small"><strong>Draft for legal review.</strong></p><ul class="mt4"><li>We acknowledge your complaint by email straight away and reply within 2 business days.</li><li>We aim to resolve complaints within 30 days and will keep you informed.</li><li>Complaints about a consultant’s clinical care can also go to the Health Care Complaints Commission (NSW) or AHPRA.</li><li>Privacy complaints can be escalated to the Office of the Australian Information Commissioner.</li></ul></section></div>';
+};
+
+pages.terms = function () {
+  var s = state.settings;
+  return '<article class="page legal" style="padding-top:2rem"><h1 class="h1-big">Terms of use</h1><p class="box-caution small mt4"><strong>Draft for legal review.</strong> This page has not yet been reviewed by a lawyer.</p>' +
+    "<h2>1. What First Available is</h2><p>An online booking service that helps you find and book a private appointment with a specialist consultant, and pay the consultant’s fee.</p>" +
+    "<h2>2. No medical advice</h2><p><strong>First Available does not provide medical advice, diagnosis or treatment.</strong> The order in which consultants appear is based only on how soon an appointment is available and how far away it is. Any medical advice is given by the consultant you see.</p><p>If you have severe pain, heavy bleeding, chest pain or feel very unwell, go to your nearest emergency department or call 000 now.</p>" +
+    "<h2>3. Consultants</h2><p>Consultants are independent practitioners. We check their registration on the AHPRA public register before they can take bookings.</p>" +
+    "<h2>4. Booking and payment</h2><ul><li>You pay the consultant’s full fee when you book.</li><li>Payment is processed by Stripe and paid to the consultant. First Available receives a commission from the consultant.</li><li>Medicare or insurance rebates, if any, are a matter between you, the consultant and your insurer.</li></ul>" +
+    "<h2>5. Cancellations and refunds</h2><ul><li>Cancel more than " + s.freeHours + " hours before your appointment for a full refund.</li><li>If you cancel later, " + (s.latePct ? s.latePct + "% of the fee is refunded" : "no refund is given") + ".</li><li>If the consultant cancels, you receive a full refund straight away.</li><li>Nothing in these terms limits your rights under the Australian Consumer Law.</li></ul>" +
+    '<h2>6. Complaints</h2><p>You can <a href="#/complaints">make a complaint</a> at any time.</p></article>';
+};
+
+pages.privacy = function () {
+  return '<article class="page legal" style="padding-top:2rem"><h1 class="h1-big">Privacy policy</h1><p class="box-caution small mt4"><strong>Draft for legal review.</strong></p>' +
+    "<p class=\"mt4\">Written to meet the Australian Privacy Principles (<em>Privacy Act 1988</em>) and structured to meet the EU GDPR for future expansion.</p>" +
+    "<h2>We do not collect medical information</h2><p>We do not ask for, and do not store, any information about your health. Please do not send it to us.</p>" +
+    "<h2>What we collect</h2><ul><li><strong>Patients:</strong> name, email, phone, the appointment booked, payment and refund references. Card details are held by Stripe, not by us.</li><li><strong>Consultants:</strong> profile, registration number, fees, hours, and calendar <em>free/busy times only</em> — never event titles, descriptions or attendees.</li><li><strong>Complaints:</strong> the details you give us.</li></ul>" +
+    "<h2>Who we share it with</h2><ul><li>The consultant you book with receives your name, phone, email and appointment details.</li><li>Stripe processes payments; our email provider sends booking emails.</li><li>We do not sell personal information or use it for marketing.</li></ul>" +
+    "<h2>Your rights</h2><p>You can ask to see, correct or delete your information. You can complain to the Office of the Australian Information Commissioner.</p></article>";
+};
+
+function notFound() { return '<div class="page"><h1 class="h1">Page not found</h1><p class="mt2"><a href="#/">Go to the home page</a></p></div>'; }
+
+/* ---------- Router ---------- */
+function route() {
+  var h = location.hash.replace(/^#/, "") || "/", qi = h.indexOf("?"), path = qi >= 0 ? h.slice(0, qi) : h, q = {};
+  (qi >= 0 ? h.slice(qi + 1) : "").split("&").forEach(function (kv) { if (!kv) return; var p = kv.split("="); q[decodeURIComponent(p[0])] = decodeURIComponent((p[1] || "").replace(/\+/g, " ")); });
+  var seg = path.split("/").filter(Boolean), html;
+  if (!seg.length) html = pages.home();
+  else if (seg[0] === "results") html = pages.results(q);
+  else if (seg[0] === "c") html = pages.consultantProfile(q, seg[1]);
+  else if (seg[0] === "book") html = pages.book(q);
+  else if (seg[0] === "pay") html = pages.pay(q, seg[1]);
+  else if (seg[0] === "booking" && seg[2] === "cancel") html = pages.cancel(q, seg[1]);
+  else if (seg[0] === "booking") html = pages.booking(q, seg[1]);
+  else if (seg[0] === "for-consultants") html = pages.forConsultants();
+  else if (seg[0] === "consultant") html = pages.consultant(q);
+  else if (seg[0] === "admin") html = pages.admin(q);
+  else if (seg[0] === "complaints") html = pages.complaints(q);
+  else if (seg[0] === "terms") html = pages.terms();
+  else if (seg[0] === "privacy") html = pages.privacy();
+  else html = notFound();
+  if (html === "") return;
+  var app = document.getElementById("app");
+  app.innerHTML = html;
+  app.focus({ preventScroll: true });
+  var target = q.rebook ? document.getElementById("rebook") : null;
+  if (target) target.scrollIntoView(); else window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+
+function showError(msg) { var el = document.getElementById("form-error"); if (el) { el.innerHTML = '<p role="alert" class="notice" style="border-left-width:1px"><strong>' + esc(msg) + "</strong></p>"; el.scrollIntoView({ block: "center" }); } }
+
+document.addEventListener("submit", function (e) {
+  var f = e.target, kind = f.getAttribute("data-form"); if (!kind) return;
+  e.preventDefault();
+  var v = {}; new FormData(f).forEach(function (val, k) { v[k] = String(val).trim(); });
+  if (kind === "search") { location.hash = "#/results?" + qs({ loc: v.loc, video: v.video }); return; }
+  if (kind === "book") {
+    if (v.name.length < 2) return showError("Please enter your full name.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) return showError("Please enter a valid email address.");
+    if (v.phone.replace(/\D/g, "").length < 8) return showError("Please enter a phone number we can reach you on.");
+    if (v.agree !== "1") return showError("Please confirm you have read and agree to the terms.");
+    var c = byId(v.c), t = +v.t;
+    if (slotsFor(c, 90).indexOf(t) < 0) return showError("Sorry, that time has just been taken. Please choose another time.");
+    var b = { ref: newRef(), cid: c.id, start: t, end: t + c.minutes * 6e4, type: v.type, name: v.name, email: v.email, phone: v.phone, fee: c.fee, commission: Math.round(c.fee * state.settings.commission / 100), status: "pending", loc: v.loc, video: v.video === "1", rebookedFrom: v.from || null };
+    state.bookings.push(b); save(); location.hash = "#/pay/" + b.ref; return;
+  }
+  if (kind === "complaint") {
+    if (v.name.length < 2) return showError("Please enter your name.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) return showError("Please enter a valid email address.");
+    if (!v.about) return showError("Please choose a topic.");
+    if (v.details.length < 10) return showError("Please tell us what happened.");
+    var ref = newRef("C"); v.ref = ref; state.complaints.unshift(v);
+    email(v.email, "We have received your complaint (" + ref + ")", "Dear " + v.name + ",\n\nWe have received your complaint, reference " + ref + ". We will reply within 2 business days.\n\nFirst Available");
+    save(); location.hash = "#/complaints?ref=" + ref; return;
+  }
+  if (kind === "settings") {
+    var cm = +v.commission, fh = +v.freeHours, lp = +v.latePct;
+    if (!(cm >= 0 && cm <= 50) || !(fh >= 0 && fh <= 336) || !(lp >= 0 && lp <= 100)) return showError("Please check the values.");
+    state.settings = { commission: cm, freeHours: fh, latePct: lp }; save();
+    document.getElementById("form-error").innerHTML = '<p class="box-ok" role="status" style="color:var(--ok)">Changes saved.</p>';
+  }
+});
+
+document.addEventListener("change", function (e) {
+  if (e.target.getAttribute && e.target.getAttribute("data-action") === "who") location.hash = "#/consultant?id=" + e.target.value;
+});
+
+document.addEventListener("click", function (e) {
+  var el = e.target.closest ? e.target.closest("[data-action]") : null; if (!el) return;
+  var a = el.getAttribute("data-action");
+  if (a === "reset") { state = freshState(); save(); location.hash = "#/"; route(); return; }
+  if (a === "pay") {
+    var b = findBooking(el.getAttribute("data-ref")), c = byId(b.cid);
+    b.status = "confirmed"; b.paid = true;
+    var when = fDate(b.start) + " at " + fTime(b.start);
+    email(b.email, "Booking confirmed: " + name(c) + ", " + when, "Dear " + b.name + ",\n\nYour appointment is confirmed.\n\nConsultant: " + name(c) + "\nDate and time: " + when + " (Sydney time)\nWhere: " + (b.type === "video" ? "Video consultation (link included)" : c.practice + ", " + c.address + ", " + c.suburb + " NSW " + c.postcode) + "\nAmount paid: " + money(b.fee) + "\nBooking reference: " + b.ref + "\n\nCancellation terms: " + terms() + "\n\nIf you have severe pain, heavy bleeding, chest pain or feel very unwell, go to your nearest emergency department or call 000 now.\n\nFirst Available is a booking service only and does not give medical advice.");
+    email("consultant (" + name(c) + ")", "New First Available booking: " + when, "Patient: " + b.name + "\nPhone: " + b.phone + "\nEmail: " + b.email + "\nReference: " + b.ref + "\n\nThis appointment has been added to your calendar.");
+    save(); location.hash = "#/booking/" + b.ref + "?new=1"; return;
+  }
+  if (a === "cancel") {
+    var bk = findBooking(el.getAttribute("data-ref")), by = el.getAttribute("data-by"), cc = byId(bk.cid);
+    if (by === "consultant" && !confirm("Cancel this booking? The patient will be refunded in full and offered another appointment.")) return;
+    bk.refund = by === "patient" ? refundFor(bk) : bk.fee; bk.status = "cancelled"; bk.cancelledBy = by; bk.cancelledAt = Date.now();
+    var w = fDate(bk.start) + " at " + fTime(bk.start);
+    email(bk.email, by === "patient" ? "Booking cancelled: " + w : "Your appointment on " + w + " has been cancelled — full refund issued",
+      by === "patient" ? "Your appointment with " + name(cc) + " on " + w + " has been cancelled. Refund: " + money(bk.refund) + "." : "Dear " + bk.name + ",\n\nWe are sorry: your appointment with " + name(cc) + " on " + w + " has been cancelled by the consultant.\n\nA full refund of " + money(bk.fee) + " has been issued.\n\nWe have found the next soonest available consultant for you. You can rebook in one click from your booking page.");
+    save(); location.hash = "#/booking/" + bk.ref + (by === "consultant" ? "?rebook=1" : "");
+    return;
+  }
+  if (a === "status") { var con = byId(el.getAttribute("data-id")); con.status = el.getAttribute("data-status"); save(); route(); }
+});
+
+route();
+})();
+</script>
+</body>
+</html>
