@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EU AI Act Trainer — iMe.ceo</title>
+<meta name="description" content="Talk live with the iMe EU AI Act Trainer.">
+<meta name="robots" content="noindex">
+<style>
+  :root { --blue:#1a73f0; --ink:#0f1b2d; --grey:#6b7686; --bg:#f4f7fb; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { height:100%; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--ink); }
+
+  /* Logo overlay, always top-left */
+  .logo { position:fixed; top:16px; left:16px; z-index:50; height:44px; width:auto; pointer-events:none;
+          filter:drop-shadow(0 1px 3px rgba(0,0,0,.25)); }
+
+  /* Email gate */
+  .gate { min-height:100%; display:flex; align-items:center; justify-content:center; padding:96px 16px 32px; }
+  .card { background:#fff; width:100%; max-width:420px; border-radius:16px; padding:32px 28px;
+          box-shadow:0 10px 40px rgba(15,27,45,.08); }
+  .card h1 { font-size:24px; margin-bottom:8px; }
+  .card p { color:var(--grey); font-size:15px; line-height:1.5; margin-bottom:20px; }
+  label { display:block; font-size:14px; font-weight:600; margin-bottom:6px; }
+  input[type=email] { width:100%; font-size:16px; padding:12px 14px; border:1px solid #d5dbe4; border-radius:10px; }
+  input[type=email]:focus { outline:2px solid var(--blue); border-color:transparent; }
+  button { width:100%; margin-top:16px; background:var(--blue); color:#fff; border:0; border-radius:10px;
+           font-size:16px; font-weight:600; padding:13px; cursor:pointer; }
+  button:disabled { opacity:.6; cursor:default; }
+  .err { color:#c0392b; font-size:14px; margin-top:10px; min-height:1em; }
+  .small { font-size:12px; color:var(--grey); margin-top:16px; line-height:1.4; }
+  .small a { color:var(--grey); }
+
+  /* Trainer */
+  .trainer { display:none; position:fixed; inset:0; background:#000; }
+  .trainer iframe { width:100%; height:100%; border:0; display:block; }
+  body.in .gate { display:none; }
+  body.in .trainer { display:block; }
+</style>
+</head>
+<body>
+
+<img class="logo" src="ime-logo.png" alt="iMe.ceo">
+
+<main class="gate">
+  <form class="card" id="gate" novalidate>
+    <h1>EU AI Act Trainer</h1>
+    <p>Enter your email to start your live session with the iMe Trainer. Please allow microphone access when asked.</p>
+    <label for="email">Email address</label>
+    <input type="email" id="email" name="email" placeholder="you@company.com" required autocomplete="email">
+    <button type="submit" id="go">Start session</button>
+    <div class="err" id="err"></div>
+    <p class="small">By continuing you agree to our <a href="/privacy">Privacy Policy</a>. We use your email only to follow up on your session.</p>
+  </form>
+</main>
+
+<section class="trainer" id="trainer"></section>
+
+<script>
+  // Where the "someone has logged in" email goes
+  var NOTIFY = "https://formsubmit.co/ajax/kenn.joyce@aiadvisers.io";
+  // Anam trainer
+  var TRAINER = "https://lab.anam.ai/frame/a5d0f771-e839-43f9-b313-ffb76d80aeb9";
+
+  function openTrainer() {
+    var t = document.getElementById("trainer");
+    if (!t.firstChild) {
+      var f = document.createElement("iframe");
+      f.src = TRAINER;
+      f.allow = "microphone; autoplay";
+      f.title = "iMe EU AI Act Trainer";
+      t.appendChild(f);
+    }
+    document.body.classList.add("in");
+  }
+
+  document.getElementById("gate").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = document.getElementById("email").value.trim();
+    var err = document.getElementById("err");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = "Please enter a valid email address."; return; }
+    err.textContent = "";
+    var btn = document.getElementById("go");
+    btn.disabled = true; btn.textContent = "Starting…";
+
+    // Send the notification, but open the trainer whatever happens
+    fetch(NOTIFY, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        _subject: "New visitor: EU AI Act Trainer (Anam)",
+        _template: "table",
+        _captcha: "false",
+        email: email,
+        page: location.href,
+        time: new Date().toLocaleString("en-IE", { timeZone: "Europe/Dublin" })
+      })
+    }).catch(function () {}).finally(openTrainer);
+  });
+</script>
+</body>
+</html>
