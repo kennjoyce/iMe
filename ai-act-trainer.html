@@ -7,19 +7,22 @@
 <meta name="description" content="Talk live with the iMe EU AI Act Trainer.">
 <meta name="robots" content="noindex">
 <style>
-  :root { --blue:#1a73f0; --ink:#0f1b2d; --grey:#6b7686; --bg:#f4f7fb; }
+  /* Page colour matches the logo's own dark background exactly */
+  :root { --blue:#1a73f0; --ink:#0f1b2d; --grey:#6b7686; --bg:#04040e; --bar:clamp(64px, 13vh, 150px); }
   * { box-sizing:border-box; margin:0; padding:0; }
   html, body { height:100%; }
-  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--ink); }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+         background:var(--bg); color:var(--ink); }
 
-  /* Logo overlay, always top-left */
-  .logo { position:fixed; top:16px; left:16px; z-index:50; height:44px; width:auto; pointer-events:none;
-          filter:drop-shadow(0 1px 3px rgba(0,0,0,.25)); }
+  /* Logo bar across the top, on every screen. Nothing sits underneath it. */
+  .topbar { position:fixed; top:0; left:0; right:0; height:var(--bar); background:var(--bg);
+            display:flex; align-items:center; padding:0 2.5vw; z-index:10; }
+  .topbar img { height:78%; width:auto; display:block; }
 
-  /* Email gate */
-  .gate { min-height:100%; display:flex; align-items:center; justify-content:center; padding:96px 16px 32px; }
-  .card { background:#fff; width:100%; max-width:420px; border-radius:16px; padding:32px 28px;
-          box-shadow:0 10px 40px rgba(15,27,45,.08); }
+  /* Email gate, below the bar */
+  .gate { min-height:100%; display:flex; align-items:center; justify-content:center;
+          padding:calc(var(--bar) + 24px) 16px 32px; }
+  .card { background:#fff; width:100%; max-width:420px; border-radius:16px; padding:32px 28px; }
   .card h1 { font-size:24px; margin-bottom:8px; }
   .card p { color:var(--grey); font-size:15px; line-height:1.5; margin-bottom:20px; }
   label { display:block; font-size:14px; font-weight:600; margin-bottom:6px; }
@@ -32,20 +35,18 @@
   .small { font-size:12px; color:var(--grey); margin-top:16px; line-height:1.4; }
   .small a { color:var(--grey); }
 
-  /* Trainer: a 3:2 "stage" the exact shape of the avatar video, centred on screen */
-  .trainer { display:none; position:fixed; inset:0; background:#000; align-items:center; justify-content:center; }
-  .stage { position:relative; width:min(100vw, 150vh); aspect-ratio:3/2; background:#000; overflow:hidden; }
-  .stage iframe { position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
-  /* Big logo pinned to the top-left of the video itself */
-  .stage-logo { position:absolute; top:3%; left:3%; width:38%; height:auto; z-index:5; pointer-events:none;
-                filter:drop-shadow(0 2px 6px rgba(0,0,0,.35)); }
-  body.in .gate, body.in .logo { display:none; }
+  /* Avatar area: fills the space below the bar, kept to the avatar's 3:2 shape */
+  .trainer { display:none; position:fixed; left:0; right:0; bottom:0; top:var(--bar);
+             background:var(--bg); align-items:center; justify-content:center; }
+  .stage { width:min(100vw, calc((100vh - var(--bar)) * 1.5)); aspect-ratio:3/2; background:var(--bg); }
+  .stage iframe { width:100%; height:100%; border:0; display:block; }
+  body.in .gate { display:none; }
   body.in .trainer { display:flex; }
 </style>
 </head>
 <body>
 
-<img class="logo" src="ime-logo.png" alt="iMe.ceo">
+<header class="topbar"><img src="ime-logo-dark.jpg" alt="iMe.ceo"></header>
 
 <main class="gate">
   <form class="card" id="gate" novalidate>
@@ -59,7 +60,7 @@
   </form>
 </main>
 
-<section class="trainer"><div class="stage" id="trainer"><img class="stage-logo" src="ime-logo.png" alt="iMe.ceo"></div></section>
+<section class="trainer"><div class="stage" id="trainer"></div></section>
 
 <script>
   // Where the "someone has logged in" email goes
