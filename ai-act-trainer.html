@@ -35,13 +35,16 @@
   .small { font-size:12px; color:var(--grey); margin-top:16px; line-height:1.4; }
   .small a { color:var(--grey); }
 
-  /* Avatar area: fills the space below the bar, kept to the avatar's 3:2 shape */
-  .trainer { display:none; position:fixed; left:0; right:0; bottom:0; top:var(--bar);
-             background:var(--bg); align-items:center; justify-content:center; }
-  .stage { width:min(100vw, calc((100vh - var(--bar)) * 1.5)); aspect-ratio:3/2; background:var(--bg); }
-  .stage iframe { width:100%; height:100%; border:0; display:block; }
-  body.in .gate { display:none; }
-  body.in .trainer { display:flex; }
+  /* Avatar area: full screen, like the HeyGen version */
+  .trainer { display:none; position:fixed; inset:0; background:#000; }
+  .trainer iframe { width:100%; height:100%; border:0; display:block; }
+  /* Logo in a white box, inside the avatar window, top-left (matches the HeyGen version) */
+  .stage-logo { position:absolute; top:8%; left:7%; width:clamp(150px, 22vw, 460px); z-index:5;
+                background:#fff; padding:clamp(8px, 1.2vw, 22px) clamp(12px, 1.8vw, 34px);
+                pointer-events:none; box-shadow:0 2px 10px rgba(0,0,0,.25); }
+  .stage-logo img { width:100%; height:auto; display:block; }
+  body.in .gate, body.in .topbar { display:none; }
+  body.in .trainer { display:block; }
 </style>
 </head>
 <body>
@@ -60,7 +63,7 @@
   </form>
 </main>
 
-<section class="trainer"><div class="stage" id="trainer"></div></section>
+<section class="trainer" id="trainer"><div class="stage-logo"><img src="ime-logo-white.png" alt="iMe.ceo"></div></section>
 
 <script>
   // Where the "someone has logged in" email goes
