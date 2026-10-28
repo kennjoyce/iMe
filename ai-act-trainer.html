@@ -155,9 +155,13 @@
     var btn = document.getElementById("go");
     btn.disabled = true; btn.textContent = "Starting…";
 
-    // Send the notification, but open the trainer whatever happens
+    // Open the trainer straight away — don't make the visitor wait for the email
+    openTrainer();
+
+    // Send the "someone has logged in" email in the background
     fetch(NOTIFY, {
       method: "POST",
+      keepalive: true,
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({
         _subject: "New visitor: EU AI Act Trainer (Anam)",
@@ -167,7 +171,7 @@
         page: location.href,
         time: new Date().toLocaleString("en-IE", { timeZone: "Europe/Dublin" })
       })
-    }).catch(function () {}).finally(openTrainer);
+    }).catch(function () {});
   });
 </script>
 </body>
