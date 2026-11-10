@@ -1,3 +1,2 @@
 # Pathfinder (CAO career guide) lives on its own Netlify site; this shows it at ime.ceo/pathfinder
-/pathfinder    /pathfinder/    301
 /pathfinder/*  https://pathfinder-ime.netlify.app/pathfinder/:splat  200
